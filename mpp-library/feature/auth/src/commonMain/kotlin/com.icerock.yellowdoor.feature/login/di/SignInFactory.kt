@@ -1,7 +1,11 @@
 package com.icerock.yellowdoor.feature.login.di
 
+import com.icerock.yellowdoor.feature.login.SignInScreen
 import com.icerock.yellowdoor.feature.login.SignInViewModel
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
+import dev.icerock.moko.widgets.core.Theme
+import dev.icerock.moko.widgets.screen.Args
+import dev.icerock.moko.widgets.screen.navigation.Route
 
 
 interface SignInRepository {
@@ -23,6 +27,19 @@ class SignInFactory(
             eventsDispatcher = eventsDispatcher,
             strings = strings,
             validation = validation
+        )
+    }
+
+    fun createSignInScreen(theme: Theme,
+                           styles: SignInScreen.Styles,
+                           signUpRoute: Route<Unit>,
+                           forgotPasswordRoute: Route<Unit>): SignInScreen {
+        return SignInScreen(
+            theme = theme,
+            styles = styles,
+            createViewModelBlock = this::createSignInViewModel,
+            signUpRoute = signUpRoute,
+            forgotPasswordRoute = forgotPasswordRoute
         )
     }
 }

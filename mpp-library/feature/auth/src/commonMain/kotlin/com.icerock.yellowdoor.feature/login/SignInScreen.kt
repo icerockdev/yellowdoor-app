@@ -12,6 +12,7 @@ import dev.icerock.moko.widgets.screen.getViewModel
 import dev.icerock.moko.widgets.screen.listen
 import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.screen.navigation.NavigationItem
+import dev.icerock.moko.widgets.screen.navigation.Route
 import dev.icerock.moko.widgets.style.input.InputType
 import dev.icerock.moko.widgets.style.view.SizeSpec
 import dev.icerock.moko.widgets.style.view.WidgetSize
@@ -21,8 +22,9 @@ class SignInScreen(
     private val theme: Theme,
     private val styles: Styles,
     private val createViewModelBlock: (
-        EventsDispatcher<SignInViewModel.EventsListener>
-    ) -> SignInViewModel
+        EventsDispatcher<SignInViewModel.EventsListener>) -> SignInViewModel,
+    private val signUpRoute: Route<Unit>,
+    private val forgotPasswordRoute: Route<Unit>
 ): WidgetScreen<Args.Empty>(), NavigationItem, SignInViewModel.EventsListener {
 
     class Styles(
@@ -39,6 +41,7 @@ class SignInScreen(
         object Phone: InputWidget.Id
         object Password: InputWidget.Id
         object SignIn: ButtonWidget.Id
+        object ForgotPassword: ButtonWidget.Id
     }
 
     override val navigationBar: NavigationBar get() = NavigationBar.None
@@ -86,6 +89,14 @@ class SignInScreen(
                 inputType = InputType.PASSWORD
             )
 
+            val forgotPasswordButton = +button(
+                category = styles.yellowTextButton,
+                size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.WrapContent),
+                id = Id.ForgotPassword,
+                content = ButtonWidget.Content.Text(Value.data(viewModel.strings.forgotPassword.desc() as StringDesc)),
+                onTap = viewModel::didTapForgotPassword
+            )
+
             val signInButton = +button(
                 category = styles.yellowButton,
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.Exact(46.0f)),
@@ -109,6 +120,9 @@ class SignInScreen(
                 passwordField.leftToLeft(phoneField)
                 passwordField.rightToRight(phoneField)
 
+                forgotPasswordButton.topToBottom(passwordField).offset(24)
+                forgotPasswordButton.rightToRight(passwordField)
+
                 signInButton.leftRightToLeftRight(passwordField)
                 signInButton.bottomToBottom(root.safeArea).offset(16)
             }
@@ -116,10 +130,10 @@ class SignInScreen(
     }
 
     override fun routeToForgotPassword() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        forgotPasswordRoute.route(this, Unit)
     }
 
     override fun routeToSignUp() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        signUpRoute.route(this, Unit)
     }
 }

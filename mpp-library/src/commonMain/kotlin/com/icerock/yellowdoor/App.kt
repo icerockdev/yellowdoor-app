@@ -8,14 +8,15 @@ import com.icerock.yellowdoor.factory.SharedFactory
 import com.icerock.yellowdoor.feature.login.SignInScreen
 import com.icerock.yellowdoor.feature.login.di.SignInFactory
 import com.icerock.yellowdoor.styles.*
+import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.desc.desc
 import dev.icerock.moko.widgets.ButtonWidget
+import dev.icerock.moko.widgets.container
 import dev.icerock.moko.widgets.core.Theme
-import dev.icerock.moko.widgets.screen.Args
-import dev.icerock.moko.widgets.screen.BaseApplication
-import dev.icerock.moko.widgets.screen.ScreenDesc
-import dev.icerock.moko.widgets.screen.TypedScreenDesc
-import dev.icerock.moko.widgets.screen.navigation.NavigationScreen
-import dev.icerock.moko.widgets.screen.navigation.createRouter
+import dev.icerock.moko.widgets.screen.*
+import dev.icerock.moko.widgets.screen.navigation.*
+import dev.icerock.moko.widgets.style.view.WidgetSize
+import dev.icerock.moko.widgets.text
 
 
 class RootNavigationScreen(
@@ -40,7 +41,25 @@ class App : BaseApplication() {
         return registerScreen(RootNavigationScreen::class) {
             val router = createRouter()
 
-            val signInScreen: TypedScreenDesc<Args.Empty, SignInScreen> = registerSignInScreen(theme)
+            val mockScreen: TypedScreenDesc<Args.Empty, MockScreen> = registerScreen(MockScreen::class){
+                MockScreen(theme)
+            }
+
+            val signInScreen: TypedScreenDesc<Args.Empty, SignInScreen> = registerScreen(SignInScreen::class) {
+                factory.signInFactory.createSignInScreen(
+                    theme = theme,
+                    styles = SignInScreen.Styles(
+                        titleText = BoldText25Category,
+                        yellowButton = YellowButtonCategory,
+                        textField = InputFieldCategory,
+                        rightButtonTextField = InputFieldCategory,
+                        yellowTextButton = YellowTextButtonCategory
+                    ),
+                    forgotPasswordRoute = router.createPushRoute(mockScreen),
+                    signUpRoute = router.createPushRoute(mockScreen)
+                    )
+
+            }
 
             return@registerScreen RootNavigationScreen(
                 initialScreen = signInScreen,
@@ -48,22 +67,18 @@ class App : BaseApplication() {
             )
         }
     }
-
-    private fun registerSignInScreen(theme: Theme): TypedScreenDesc<Args.Empty, SignInScreen> {
-        return registerScreen(SignInScreen::class) {
-            SignInScreen(
-                theme = theme,
-                styles = SignInScreen.Styles(
-                    titleText = BoldText25Category,
-                    yellowButton = YellowButtonCategory,
-                    textField = InputFieldCategory,
-                    rightButtonTextField = InputFieldCategory,
-                    yellowTextButton = YellowTextButtonCategory
-                ),
-                createViewModelBlock = factory.signInFactory::createSignInViewModel
-            )
-        }
-    }
 }
 
 
+class MockScreen(private val theme: Theme) : WidgetScreen<Args.Empty>(), NavigationItem {
+    override val navigationBar: NavigationBar get() = NavigationBar.Normal("Title".desc())
+
+    override fun createContentWidget() = with(theme) {
+        container(size = WidgetSize.AsParent) {
+            center {
+                text(size = WidgetSize.WrapContent,
+                     text = const("UNDER CONSTRUCTION".desc() as StringDesc))
+            }
+        }
+    }
+}

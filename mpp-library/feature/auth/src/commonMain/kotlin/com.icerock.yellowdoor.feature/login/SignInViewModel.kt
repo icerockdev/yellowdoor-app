@@ -48,10 +48,18 @@ class SignInViewModel(
     })
 
     fun didTapSignUpButton() {
-
+        eventsDispatcher.dispatchEvent {
+            routeToSignUp()
+        }
     }
 
     fun didTapSignInButton() {
 
+    }
+
+    fun didTapForgotPassword() {
+        eventsDispatcher.dispatchEvent {
+            routeToForgotPassword()
+        }
     }
 }
