@@ -22,7 +22,7 @@ class MainScreen(
             center {
                 text(
                     size = WidgetSize.WrapContent,
-                    text = const(MR.strings.hello_world.desc() as StringDesc)
+                    text = const(MR.strings.signIn_phone.desc() as StringDesc)
                 )
             }
         }
