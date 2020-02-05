@@ -1,21 +1,33 @@
 package com.icerock.yellowdoor.styles
 
-import dev.icerock.moko.graphics.Color
-import dev.icerock.moko.widgets.factory.*
-import dev.icerock.moko.widgets.style.background.*
-import dev.icerock.moko.widgets.style.view.*
+import dev.icerock.moko.widgets.factory.FloatingLabelInputViewFactory
+import dev.icerock.moko.widgets.factory.SystemButtonViewFactory
+import dev.icerock.moko.widgets.factory.SystemTextViewFactory
+import dev.icerock.moko.widgets.style.background.Background
+import dev.icerock.moko.widgets.style.background.Fill
+import dev.icerock.moko.widgets.style.background.Shape
+import dev.icerock.moko.widgets.style.background.StateBackground
+import dev.icerock.moko.widgets.style.view.Colors
+import dev.icerock.moko.widgets.style.view.FontStyle
+import dev.icerock.moko.widgets.style.view.TextStyle
 
 
 @Suppress("FunctionName")
 fun YellowButtonFactory(): SystemButtonViewFactory {
     return SystemButtonViewFactory(
         background = StateBackground(
-            normal = Background(fill = Fill.Solid(Colors.yellowButtonBackgroundColor),
-                shape = Shape.Rectangle(cornerRadius = 8.0f)),
-            disabled = Background(fill = Fill.Solid(Colors.yellowButtonBackgroundColor.withAlphaComponent(128)),
-                shape = Shape.Rectangle(cornerRadius = 8.0f)),
-            pressed = Background(fill = Fill.Solid(Colors.yellowButtonBackgroundColor.withAlphaComponent(128)),
-                shape = Shape.Rectangle(cornerRadius = 8.0f))
+            normal = Background(
+                fill = Fill.Solid(Colors.yellowButtonBackgroundColor),
+                shape = Shape.Rectangle(cornerRadius = 8.0f)
+            ),
+            disabled = Background(
+                fill = Fill.Solid(Colors.yellowButtonBackgroundColor.withAlphaComponent(128)),
+                shape = Shape.Rectangle(cornerRadius = 8.0f)
+            ),
+            pressed = Background(
+                fill = Fill.Solid(Colors.yellowButtonBackgroundColor.withAlphaComponent(128)),
+                shape = Shape.Rectangle(cornerRadius = 8.0f)
+            )
         ),
         textStyle = TextStyle(size = 17, color = Colors.blackTextColor)
     )
@@ -24,7 +36,11 @@ fun YellowButtonFactory(): SystemButtonViewFactory {
 @Suppress("FunctionName")
 fun YellowTextButtonFactory(): SystemButtonViewFactory {
     return SystemButtonViewFactory(
-        textStyle = TextStyle(size = 15, color = Colors.yellowTextColor, fontStyle = FontStyle.MEDIUM)
+        textStyle = TextStyle(
+            size = 15,
+            color = Colors.yellowTextColor,
+            fontStyle = FontStyle.MEDIUM
+        )
     )
 }
 
@@ -39,6 +55,7 @@ fun InputFieldFactory(): FloatingLabelInputViewFactory {
     )
 }
 
+@Suppress("FunctionName")
 fun ForgotPasswordInputFieldFactory(): FloatingLabelInputViewFactory {
     return FloatingLabelInputViewFactory(
         underLineColor = Colors.separatorColor,

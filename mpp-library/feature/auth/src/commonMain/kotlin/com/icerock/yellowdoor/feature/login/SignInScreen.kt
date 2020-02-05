@@ -1,6 +1,7 @@
 package com.icerock.yellowdoor.feature.login
 
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
+import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.moko.widgets.*
@@ -22,27 +23,12 @@ class SignInScreen(
     private val theme: Theme,
     private val styles: Styles,
     private val createViewModelBlock: (
-        EventsDispatcher<SignInViewModel.EventsListener>) -> SignInViewModel,
+        EventsDispatcher<SignInViewModel.EventsListener>
+    ) -> SignInViewModel,
     private val signUpRoute: Route<Unit>,
-    private val forgotPasswordRoute: Route<Unit>
-): WidgetScreen<Args.Empty>(), NavigationItem, SignInViewModel.EventsListener {
-
-    class Styles(
-        val titleText: TextWidget.Category?,
-        val textField: InputWidget.Category?,
-        val rightButtonTextField: InputWidget.Category?,
-        val yellowTextButton: ButtonWidget.Category?,
-        val yellowButton: ButtonWidget.Category?
-    )
-
-    object Id {
-        object Title: TextWidget.Id
-        object SignUp: ButtonWidget.Id
-        object Phone: InputWidget.Id
-        object Password: InputWidget.Id
-        object SignIn: ButtonWidget.Id
-        object ForgotPassword: ButtonWidget.Id
-    }
+    private val forgotPasswordRoute: Route<Unit>,
+    private val strings: Strings
+) : WidgetScreen<Args.Empty>(), NavigationItem, SignInViewModel.EventsListener {
 
     override val navigationBar: NavigationBar get() = NavigationBar.None
     override val isDismissKeyboardOnTap: Boolean = true
@@ -60,14 +46,14 @@ class SignInScreen(
                 category = styles.titleText,
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.WrapContent),
                 id = Id.Title,
-                text = const(viewModel.strings.signIn.desc() as StringDesc)
+                text = const(strings.signIn.desc() as StringDesc)
             )
 
             val signUpButton = +button(
                 category = styles.yellowTextButton,
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.WrapContent),
                 id = Id.SignUp,
-                content = ButtonWidget.Content.Text(Value.data(viewModel.strings.signUp.desc() as StringDesc)),
+                content = ButtonWidget.Content.Text(Value.data(strings.signUp.desc() as StringDesc)),
                 onTap = viewModel::didTapSignUpButton
             )
 
@@ -76,7 +62,7 @@ class SignInScreen(
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.WrapContent),
                 id = Id.Phone,
                 field = viewModel.phoneField,
-                label = const(viewModel.strings.phone.desc() as StringDesc),
+                label = const(strings.phone.desc() as StringDesc),
                 inputType = InputType.PHONE
             )
 
@@ -85,7 +71,7 @@ class SignInScreen(
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.WrapContent),
                 id = Id.Password,
                 field = viewModel.passwordField,
-                label = const(viewModel.strings.password.desc() as StringDesc),
+                label = const(strings.password.desc() as StringDesc),
                 inputType = InputType.PASSWORD
             )
 
@@ -93,7 +79,7 @@ class SignInScreen(
                 category = styles.yellowTextButton,
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.WrapContent),
                 id = Id.ForgotPassword,
-                content = ButtonWidget.Content.Text(Value.data(viewModel.strings.forgotPassword.desc() as StringDesc)),
+                content = ButtonWidget.Content.Text(Value.data(strings.forgotPassword.desc() as StringDesc)),
                 onTap = viewModel::didTapForgotPassword
             )
 
@@ -101,30 +87,30 @@ class SignInScreen(
                 category = styles.yellowButton,
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.Exact(46.0f)),
                 id = Id.SignIn,
-                content = ButtonWidget.Content.Text(Value.data(viewModel.strings.signIn.desc() as StringDesc)),
+                content = ButtonWidget.Content.Text(Value.data(strings.signIn.desc() as StringDesc)),
                 onTap = viewModel::didTapSignInButton
             )
 
             constraints {
-                titleText.leftToLeft(root.safeArea).offset(16)
-                titleText.topToTop(root.safeArea).offset(24)
+                titleText leftToLeft root.safeArea offset 16
+                titleText topToTop root.safeArea offset 24
 
-                signUpButton.rightToRight(root.safeArea).offset(16)
-                signUpButton.centerYToCenterY(titleText)
+                signUpButton rightToRight root.safeArea offset 16
+                signUpButton centerYToCenterY titleText
 
-                phoneField.topToBottom(titleText).offset(32)
-                phoneField.leftToLeft(root.safeArea).offset(16)
-                phoneField.rightToRight(root.safeArea).offset(16)
+                phoneField topToBottom titleText offset 32
+                phoneField leftToLeft root.safeArea offset 16
+                phoneField rightToRight root.safeArea offset 16
 
-                passwordField.topToBottom(phoneField).offset(32)
-                passwordField.leftToLeft(phoneField)
-                passwordField.rightToRight(phoneField)
+                passwordField topToBottom phoneField offset 32
+                passwordField leftToLeft phoneField
+                passwordField rightToRight phoneField
 
-                forgotPasswordButton.topToBottom(passwordField).offset(24)
-                forgotPasswordButton.rightToRight(passwordField)
+                forgotPasswordButton topToBottom passwordField offset 24
+                forgotPasswordButton rightToRight passwordField
 
-                signInButton.leftRightToLeftRight(passwordField)
-                signInButton.bottomToBottom(root.safeArea).offset(16)
+                signInButton leftRightToLeftRight passwordField
+                signInButton bottomToBottom root.safeArea offset 16
             }
         }
     }
@@ -135,5 +121,30 @@ class SignInScreen(
 
     override fun routeToSignUp() {
         signUpRoute.route(this, Unit)
+    }
+
+    class Styles(
+        val titleText: TextWidget.Category?,
+        val textField: InputWidget.Category?,
+        val rightButtonTextField: InputWidget.Category?,
+        val yellowTextButton: ButtonWidget.Category?,
+        val yellowButton: ButtonWidget.Category?
+    )
+
+    interface Strings {
+        val signIn: StringResource
+        val signUp: StringResource
+        val phone: StringResource
+        val password: StringResource
+        val forgotPassword: StringResource
+    }
+
+    object Id {
+        object Title : TextWidget.Id
+        object SignUp : ButtonWidget.Id
+        object Phone : InputWidget.Id
+        object Password : InputWidget.Id
+        object SignIn : ButtonWidget.Id
+        object ForgotPassword : ButtonWidget.Id
     }
 }

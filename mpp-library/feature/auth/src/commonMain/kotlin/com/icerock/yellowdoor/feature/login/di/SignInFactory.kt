@@ -4,18 +4,12 @@ import com.icerock.yellowdoor.feature.login.SignInScreen
 import com.icerock.yellowdoor.feature.login.SignInViewModel
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.widgets.core.Theme
-import dev.icerock.moko.widgets.screen.Args
 import dev.icerock.moko.widgets.screen.navigation.Route
-
-
-interface SignInRepository {
-    suspend fun signIn(phone: String, password: String): String
-}
 
 
 class SignInFactory(
     val signInRepository: SignInRepository,
-    val strings: SignInViewModel.Strings,
+    val strings: SignInScreen.Strings,
     val validation: SignInViewModel.Validation
 ) {
     fun createSignInViewModel(
@@ -25,21 +19,23 @@ class SignInFactory(
         return SignInViewModel(
             repository = signInRepository,
             eventsDispatcher = eventsDispatcher,
-            strings = strings,
             validation = validation
         )
     }
 
-    fun createSignInScreen(theme: Theme,
-                           styles: SignInScreen.Styles,
-                           signUpRoute: Route<Unit>,
-                           forgotPasswordRoute: Route<Unit>): SignInScreen {
+    fun createSignInScreen(
+        theme: Theme,
+        styles: SignInScreen.Styles,
+        signUpRoute: Route<Unit>,
+        forgotPasswordRoute: Route<Unit>
+    ): SignInScreen {
         return SignInScreen(
             theme = theme,
             styles = styles,
             createViewModelBlock = this::createSignInViewModel,
             signUpRoute = signUpRoute,
-            forgotPasswordRoute = forgotPasswordRoute
+            forgotPasswordRoute = forgotPasswordRoute,
+            strings = strings
         )
     }
 }
