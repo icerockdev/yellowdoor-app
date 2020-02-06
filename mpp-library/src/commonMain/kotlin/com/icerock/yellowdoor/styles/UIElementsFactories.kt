@@ -21,11 +21,11 @@ fun YellowButtonFactory(): SystemButtonViewFactory {
                 shape = Shape.Rectangle(cornerRadius = 8.0f)
             ),
             disabled = Background(
-                fill = Fill.Solid(Colors.yellowButtonBackgroundColor.withAlphaComponent(128)),
+                fill = Fill.Solid(Colors.yellowButtonBackgroundColor.copy(red = 128)),
                 shape = Shape.Rectangle(cornerRadius = 8.0f)
             ),
             pressed = Background(
-                fill = Fill.Solid(Colors.yellowButtonBackgroundColor.withAlphaComponent(128)),
+                fill = Fill.Solid(Colors.yellowButtonBackgroundColor.copy(red = 128)),
                 shape = Shape.Rectangle(cornerRadius = 8.0f)
             )
         ),

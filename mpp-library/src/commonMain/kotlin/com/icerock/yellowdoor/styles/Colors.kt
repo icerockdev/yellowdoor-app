@@ -10,8 +10,3 @@ val Colors.blackTextColor: Color get() = Color(0x020B14FF)
 val Colors.placeholderTextColor: Color get() = Color(0x7C7E86FF)
 val Colors.separatorColor: Color get() = Color(0xDEDFE8FF)
 val Colors.errorRedColor: Color get() = Color(0xE85444FF)
-
-
-fun Color.withAlphaComponent(alpha: Int): Color {
-    return Color(red = this.red, green = this.green, blue = this.blue, alpha = alpha)
-}
