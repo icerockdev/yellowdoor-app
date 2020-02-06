@@ -5,4 +5,13 @@
     <string name="signIn.phone">Phone</string>
     <string name="signIn.password">Password</string>
     <string name="signIn.forgotPassword">Forgot password?</string>
+
+    <string name="signUp.signUp">Sign Up</string>
+    <string name="signUp.lastName">Last name</string>
+    <string name="signUp.firstName">First name</string>
+    <string name="signUp.phone">Phone</string>
+    <string name="signUp.email">Email</string>
+    <string name="signUp.password">Password</string>
+    <string name="signUp.repeatPassword">Repeat password</string>
+    <string name="signUp.iAcceptTheUserAgreement">I accept the <a href="http://www.google.com">User Agreement</a></string>
 </resources>

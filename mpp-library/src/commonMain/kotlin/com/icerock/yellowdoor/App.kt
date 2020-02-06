@@ -6,15 +6,18 @@ package com.icerock.yellowdoor
 
 import com.icerock.yellowdoor.factory.SharedFactory
 import com.icerock.yellowdoor.feature.login.SignInScreen
+import com.icerock.yellowdoor.feature.register.SignUpScreen
 import com.icerock.yellowdoor.styles.*
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.moko.widgets.container
 import dev.icerock.moko.widgets.core.Theme
+import dev.icerock.moko.widgets.factory.CheckboxSwitchViewFactory
 import dev.icerock.moko.widgets.screen.*
 import dev.icerock.moko.widgets.screen.navigation.*
 import dev.icerock.moko.widgets.style.view.WidgetSize
 import dev.icerock.moko.widgets.text
+import org.example.library.MR
 
 
 class RootNavigationScreen(
@@ -34,6 +37,12 @@ class App : BaseApplication() {
             factory[InputFieldCategory] = InputFieldFactory()
             factory[YellowTextButtonCategory] = YellowTextButtonFactory()
             factory[BoldText25Category] = BoldText25Factory()
+            factory[LinkButtonCategory] = LinkButtonFactory()
+            factory[HTMLTextCategory] = HTMLTextFactory(12)
+            factory[SignUpScreen.Id.Checkbox] = CheckboxSwitchViewFactory(
+                checkedImage = MR.images.checkboxEnable,
+                uncheckedImage = MR.images.checkboxDisable
+            )
         }
 
         return registerScreen(RootNavigationScreen::class) {
@@ -42,6 +51,18 @@ class App : BaseApplication() {
             val mockScreen: TypedScreenDesc<Args.Empty, MockScreen> =
                 registerScreen(MockScreen::class) {
                     MockScreen(theme)
+                }
+
+            val signUpScreen: TypedScreenDesc<Args.Empty, SignUpScreen> =
+                registerScreen(SignUpScreen::class) {
+                    factory.signUpFactory.createSignUpScreen(
+                        theme = theme,
+                        styles = SignUpScreen.Styles(
+                            linkText = HTMLTextCategory,
+                            textField = InputFieldCategory,
+                            yellowButton = YellowButtonCategory
+                        )
+                    )
                 }
 
             val signInScreen: TypedScreenDesc<Args.Empty, SignInScreen> =
@@ -56,7 +77,7 @@ class App : BaseApplication() {
                             yellowTextButton = YellowTextButtonCategory
                         ),
                         forgotPasswordRoute = router.createPushRoute(mockScreen),
-                        signUpRoute = router.createPushRoute(mockScreen)
+                        signUpRoute = router.createPushRoute(signUpScreen)
                     )
 
                 }

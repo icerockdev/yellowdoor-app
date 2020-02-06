@@ -76,3 +76,24 @@ fun BoldText25Factory(): SystemTextViewFactory {
         )
     )
 }
+
+@Suppress("FunctionName")
+fun LinkButtonFactory(): SystemButtonViewFactory {
+    return SystemButtonViewFactory(
+        textStyle = TextStyle(
+            size = 15,
+            color = Colors.yellowTextColor,
+            fontStyle = FontStyle.MEDIUM
+        )
+    )
+}
+
+@Suppress("FunctionName")
+fun HTMLTextFactory(fontSize: Int): SystemTextViewFactory {
+    return SystemTextViewFactory(
+        textStyle = TextStyle(
+            size = fontSize
+        ),
+        isHtmlConverted = true
+    )
+}

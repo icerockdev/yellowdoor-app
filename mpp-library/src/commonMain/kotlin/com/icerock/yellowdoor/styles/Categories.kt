@@ -9,3 +9,5 @@ object YellowButtonCategory : ButtonWidget.Category
 object YellowTextButtonCategory : ButtonWidget.Category
 object InputFieldCategory : InputWidget.Category
 object BoldText25Category : TextWidget.Category
+object LinkButtonCategory : ButtonWidget.Category
+object HTMLTextCategory : TextWidget.Category
