@@ -7,6 +7,7 @@ package com.icerock.yellowdoor
 import com.icerock.yellowdoor.factory.SharedFactory
 import com.icerock.yellowdoor.feature.login.SignInScreen
 import com.icerock.yellowdoor.feature.register.SignUpScreen
+import com.icerock.yellowdoor.feature.smsCodeConfirmation.SMSCodeConfirmationScreen
 import com.icerock.yellowdoor.styles.*
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
@@ -39,6 +40,7 @@ class App : BaseApplication() {
             factory[BoldText25Category] = BoldText25Factory()
             factory[LinkButtonCategory] = LinkButtonFactory()
             factory[HTMLTextCategory] = HTMLTextFactory(12)
+            factory[InstructionTextCategory] = InstructionTextFactory()
             factory[SignUpScreen.Id.Checkbox] = CheckboxSwitchViewFactory(
                 checkedImage = MR.images.checkboxEnable,
                 uncheckedImage = MR.images.checkboxDisable
@@ -53,6 +55,19 @@ class App : BaseApplication() {
                     MockScreen(theme)
                 }
 
+            val smsCodeConfirmationScreen: TypedScreenDesc<Args.Parcel<SMSCodeConfirmationScreen.Arg>, SMSCodeConfirmationScreen> =
+                registerScreen(SMSCodeConfirmationScreen::class) {
+                    factory.smsCodeConfirmationFactory.createSMSCodeConfirmationScreen(
+                        theme = theme,
+                        styles = SMSCodeConfirmationScreen.Styles(
+                            yellowButton = YellowButtonCategory,
+                            instructionText = InstructionTextCategory,
+                            textField = InputFieldCategory
+                        ),
+                        routeNext = router.createPushRoute(mockScreen)
+                    )
+                }
+
             val signUpScreen: TypedScreenDesc<Args.Empty, SignUpScreen> =
                 registerScreen(SignUpScreen::class) {
                     factory.signUpFactory.createSignUpScreen(
@@ -61,7 +76,11 @@ class App : BaseApplication() {
                             linkText = HTMLTextCategory,
                             textField = InputFieldCategory,
                             yellowButton = YellowButtonCategory
-                        )
+                        ),
+                        smsCodeConfirmationRoute = router.createPushRoute(smsCodeConfirmationScreen) {
+                            SMSCodeConfirmationScreen.Arg(it.phone)
+                        },
+                        userAgreementRoute = router.createPushRoute(mockScreen)
                     )
                 }
 

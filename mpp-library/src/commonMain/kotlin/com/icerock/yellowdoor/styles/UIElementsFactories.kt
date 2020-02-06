@@ -97,3 +97,13 @@ fun HTMLTextFactory(fontSize: Int): SystemTextViewFactory {
         isHtmlConverted = true
     )
 }
+
+@Suppress("FunctionName")
+fun InstructionTextFactory(): SystemTextViewFactory {
+    return SystemTextViewFactory(
+        textStyle = TextStyle(
+            size = 12,
+            color = Colors.grayTextColor
+        )
+    )
+}

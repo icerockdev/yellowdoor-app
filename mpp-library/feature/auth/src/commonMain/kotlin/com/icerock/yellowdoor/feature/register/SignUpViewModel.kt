@@ -6,9 +6,11 @@ import dev.icerock.moko.fields.liveBlock
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
+import dev.icerock.moko.mvvm.livedata.all
 import dev.icerock.moko.mvvm.livedata.map
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.StringDesc
+import kotlinx.coroutines.launch
 
 
 class SignUpViewModel(
@@ -38,8 +40,34 @@ class SignUpViewModel(
 
     val isUserAgreementAccepted: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    fun didTapSignUpButton() {
+    val isFormValid: LiveData<Boolean> = listOf<LiveData<Boolean>>(
+        lastNameField.isValid,
+        firstNameField.isValid,
+        phoneField.isValid,
+        emailField.isValid,
+        emailField.isValid,
+        passwordField.isValid,
+        repeatPasswordField.isValid
+    ).all(true)
 
+    fun didTapSignUpButton() {
+        viewModelScope.launch {
+            try {
+                repository.signUp(
+                    lastName = lastNameField.value(),
+                    firstName = firstNameField.value(),
+                    phone = phoneField.value().filter { it in '0'..'9' },
+                    email = emailField.value(),
+                    password = passwordField.value()
+                )
+
+                eventsDispatcher.dispatchEvent {
+                    routeToSMSCodeConfirmation(phoneField.value())
+                }
+            } catch (error: Throwable) {
+
+            }
+        }
     }
 
     fun didTapUserAgreementButton() {
@@ -48,6 +76,7 @@ class SignUpViewModel(
 
     interface EventsListener {
         fun routeToUserAgreement()
+        fun routeToSMSCodeConfirmation(phone: String)
     }
 
     interface Validation {

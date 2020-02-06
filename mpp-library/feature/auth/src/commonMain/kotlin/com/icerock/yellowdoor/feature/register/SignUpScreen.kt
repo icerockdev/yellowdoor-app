@@ -1,20 +1,20 @@
 package com.icerock.yellowdoor.feature.register
 
+import com.icerock.yellowdoor.feature.smsCodeConfirmation.SMSCodeConfirmationScreen
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.moko.widgets.*
-import dev.icerock.moko.widgets.core.Image
 import dev.icerock.moko.widgets.core.Theme
 import dev.icerock.moko.widgets.core.Value
-import dev.icerock.moko.widgets.factory.CheckboxSwitchViewFactory
 import dev.icerock.moko.widgets.screen.Args
 import dev.icerock.moko.widgets.screen.WidgetScreen
 import dev.icerock.moko.widgets.screen.getViewModel
 import dev.icerock.moko.widgets.screen.listen
 import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.screen.navigation.NavigationItem
+import dev.icerock.moko.widgets.screen.navigation.Route
 import dev.icerock.moko.widgets.style.input.InputType
 import dev.icerock.moko.widgets.style.view.SizeSpec
 import dev.icerock.moko.widgets.style.view.WidgetSize
@@ -26,7 +26,9 @@ class SignUpScreen(
     private val theme: Theme,
     private val createViewModelBlock: (
         EventsDispatcher<SignUpViewModel.EventsListener>
-    ) -> SignUpViewModel
+    ) -> SignUpViewModel,
+    private val userAgreementRoute: Route<Unit>,
+    private val smsCodeConfirmationRoute: Route<SMSCodeConfirmationScreen.Arg>
 ) : WidgetScreen<Args.Empty>(), NavigationItem, SignUpViewModel.EventsListener {
 
     override val navigationBar: NavigationBar = NavigationBar.Normal(strings.signUp.desc())
@@ -111,7 +113,8 @@ class SignUpScreen(
                         size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.Exact(46.0f)),
                         id = Id.SignUp,
                         content = ButtonWidget.Content.Text(Value.data(strings.signUp.desc() as StringDesc)),
-                        onTap = viewModel::didTapSignUpButton
+                        onTap = viewModel::didTapSignUpButton,
+                        enabled = viewModel.isFormValid
                     )
 
                     constraints {
@@ -149,6 +152,10 @@ class SignUpScreen(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun routeToSMSCodeConfirmation(phone: String) {
+        smsCodeConfirmationRoute.route(this, SMSCodeConfirmationScreen.Arg(phone))
+    }
+
     class Styles(
         val textField: InputWidget.Category,
         val yellowButton: ButtonWidget.Category,
@@ -175,8 +182,8 @@ class SignUpScreen(
         object RepeatPassword : InputWidget.Id
         object SignUp : ButtonWidget.Id
         object Scroll : ScrollWidget.Id
-        object Container: ConstraintWidget.Id
-        object Checkbox: SwitchWidget.Id
-        object UserAgreementText: TextWidget.Id
+        object Container : ConstraintWidget.Id
+        object Checkbox : SwitchWidget.Id
+        object UserAgreementText : TextWidget.Id
     }
 }

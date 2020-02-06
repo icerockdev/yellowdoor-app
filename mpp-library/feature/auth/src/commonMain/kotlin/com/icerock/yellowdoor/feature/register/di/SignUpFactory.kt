@@ -2,8 +2,10 @@ package com.icerock.yellowdoor.feature.register.di
 
 import com.icerock.yellowdoor.feature.register.SignUpScreen
 import com.icerock.yellowdoor.feature.register.SignUpViewModel
+import com.icerock.yellowdoor.feature.smsCodeConfirmation.SMSCodeConfirmationScreen
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.widgets.core.Theme
+import dev.icerock.moko.widgets.screen.navigation.Route
 
 
 class SignUpFactory(
@@ -24,13 +26,17 @@ class SignUpFactory(
 
     fun createSignUpScreen(
         theme: Theme,
-        styles: SignUpScreen.Styles
+        styles: SignUpScreen.Styles,
+        userAgreementRoute: Route<Unit>,
+        smsCodeConfirmationRoute: Route<SMSCodeConfirmationScreen.Arg>
     ): SignUpScreen {
         return SignUpScreen(
             strings = strings,
             theme = theme,
             styles = styles,
-            createViewModelBlock = this::createSignUpViewModel
+            createViewModelBlock = this::createSignUpViewModel,
+            userAgreementRoute = userAgreementRoute,
+            smsCodeConfirmationRoute = smsCodeConfirmationRoute
         )
     }
 }
