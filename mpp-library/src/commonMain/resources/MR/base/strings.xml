@@ -13,10 +13,14 @@
     <string name="signUp.email">Email</string>
     <string name="signUp.password">Password</string>
     <string name="signUp.repeatPassword">Repeat password</string>
-    <string name="signUp.iAcceptTheUserAgreement">I accept the &lt;a href=http://www.google.com&gt;User Agreement&lt;/a&gt;</string>
+    <string name="signUp.iAcceptTheUserAgreement">I accept the &lt;a href=http://www.google.com&gt;User
+        Agreement&lt;/a&gt;
+    </string>
 
     <string name="smsCodeConfirmation.numberConfirmation">Number confirmation</string>
     <string name="smsCodeConfirmation.smsCode">SMS code</string>
-    <string name="smsCodeConfirmation.smsCodeSentToPhone">SMS with a confirmation code was sent to the phone</string>
+    <string name="smsCodeConfirmation.smsCodeSentToPhone">SMS with a confirmation code was sent to
+        the phone
+    </string>
     <string name="smsCodeConfirmation.next">Next</string>
 </resources>

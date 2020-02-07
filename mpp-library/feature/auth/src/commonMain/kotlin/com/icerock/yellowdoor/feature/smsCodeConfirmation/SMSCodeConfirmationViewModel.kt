@@ -8,6 +8,7 @@ import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.all
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.StringDesc
+import kotlinx.coroutines.launch
 
 
 class SMSCodeConfirmationViewModel(
@@ -16,14 +17,28 @@ class SMSCodeConfirmationViewModel(
 ) : ViewModel() {
 
     val smsCodeField: FormField<String, StringDesc> =
-        FormField("", validation = liveBlock{null})
+        FormField("", validation = liveBlock { null })
 
     val isFormValid: LiveData<Boolean> = listOf<LiveData<Boolean>>(
         smsCodeField.isValid
     ).all(true)
 
     fun didTapNextButton() {
+        if (!isFormValid.value) {
+            return
+        }
 
+        viewModelScope.launch {
+            try {
+                repository.confirm(smsCodeField.value())
+
+                eventsDispatcher.dispatchEvent {
+                    routeToPersonalData()
+                }
+            } catch (error: Throwable) {
+
+            }
+        }
     }
 
     interface EventsListener {

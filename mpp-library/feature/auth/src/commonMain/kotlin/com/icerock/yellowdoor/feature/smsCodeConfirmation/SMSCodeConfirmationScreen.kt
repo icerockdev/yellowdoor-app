@@ -14,6 +14,7 @@ import dev.icerock.moko.widgets.screen.*
 import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.screen.navigation.NavigationItem
 import dev.icerock.moko.widgets.screen.navigation.Route
+import dev.icerock.moko.widgets.screen.navigation.route
 import dev.icerock.moko.widgets.style.view.SizeSpec
 import dev.icerock.moko.widgets.style.view.WidgetSize
 
@@ -26,9 +27,11 @@ class SMSCodeConfirmationScreen(
     private val createViewModelBlock: (
         EventsDispatcher<SMSCodeConfirmationViewModel.EventsListener>
     ) -> SMSCodeConfirmationViewModel
-) : WidgetScreen<Args.Parcel<SMSCodeConfirmationScreen.Arg>>(), SMSCodeConfirmationViewModel.EventsListener, NavigationItem {
+) : WidgetScreen<Args.Parcel<SMSCodeConfirmationScreen.Arg>>(),
+    SMSCodeConfirmationViewModel.EventsListener, NavigationItem {
 
-    override val navigationBar: NavigationBar = NavigationBar.Normal(strings.numberConfirmation.desc())
+    override val navigationBar: NavigationBar =
+        NavigationBar.Normal(strings.numberConfirmation.desc())
     override val isDismissKeyboardOnTap: Boolean = true
     override val isKeyboardResizeContent: Boolean = true
 
@@ -37,7 +40,10 @@ class SMSCodeConfirmationScreen(
             createViewModelBlock(createEventsDispatcher())
         }
 
-        viewModel.eventsDispatcher.listen(this@SMSCodeConfirmationScreen, this@SMSCodeConfirmationScreen)
+        viewModel.eventsDispatcher.listen(
+            this@SMSCodeConfirmationScreen,
+            this@SMSCodeConfirmationScreen
+        )
 
         constraint(size = WidgetSize.AsParent) {
             val smsCodeTextField = +input(
@@ -67,21 +73,21 @@ class SMSCodeConfirmationScreen(
             )
 
             constraints {
-                smsCodeTextField leftToLeft root.safeArea offset 16
-                smsCodeTextField topToTop root.safeArea offset 24
-                smsCodeTextField rightToRight root.safeArea offset 16
+                smsCodeTextField.leftToLeft(root.safeArea).offset(16)
+                smsCodeTextField.topToTop(root.safeArea).offset(24)
+                smsCodeTextField.rightToRight(root.safeArea).offset(16)
 
-                instructionLabel leftRightToLeftRight smsCodeTextField
-                instructionLabel topToBottom smsCodeTextField offset 24
+                instructionLabel.leftRightToLeftRight(smsCodeTextField)
+                instructionLabel.topToBottom(smsCodeTextField).offset(24)
 
-                signUpButton leftRightToLeftRight smsCodeTextField
-                signUpButton bottomToBottom root.safeArea offset 16
+                signUpButton.leftRightToLeftRight(smsCodeTextField)
+                signUpButton.bottomToBottom(root.safeArea).offset(16)
             }
         }
     }
 
     override fun routeToPersonalData() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        routeNext.route(this)
     }
 
     @Parcelize
@@ -101,8 +107,8 @@ class SMSCodeConfirmationScreen(
     }
 
     object Id {
-        object SMSCodeField: InputWidget.Id
-        object InstructionLabel: TextWidget.Id
-        object NextButton: ButtonWidget.Id
+        object SMSCodeField : InputWidget.Id
+        object InstructionLabel : TextWidget.Id
+        object NextButton : ButtonWidget.Id
     }
 }

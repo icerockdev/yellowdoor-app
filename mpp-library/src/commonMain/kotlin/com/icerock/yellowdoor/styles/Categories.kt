@@ -11,4 +11,4 @@ object InputFieldCategory : InputWidget.Category
 object BoldText25Category : TextWidget.Category
 object LinkButtonCategory : ButtonWidget.Category
 object HTMLTextCategory : TextWidget.Category
-object InstructionTextCategory: TextWidget.Category
+object InstructionTextCategory : TextWidget.Category
