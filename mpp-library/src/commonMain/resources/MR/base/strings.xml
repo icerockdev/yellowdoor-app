@@ -23,4 +23,8 @@
         the phone
     </string>
     <string name="smsCodeConfirmation.next">Next</string>
+
+    <string name="passwordRecovery.passwordRecovery">Password recovery</string>
+    <string name="passwordRecovery.phoneNumber">Your phone number</string>
+    <string name="passwordRecovery.next">Next</string>
 </resources>

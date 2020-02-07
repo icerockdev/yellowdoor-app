@@ -5,6 +5,7 @@
 package com.icerock.yellowdoor
 
 import com.icerock.yellowdoor.factory.SharedFactory
+import com.icerock.yellowdoor.feature.forgotPassword.ForgotPasswordScreen
 import com.icerock.yellowdoor.feature.login.SignInScreen
 import com.icerock.yellowdoor.feature.register.SignUpScreen
 import com.icerock.yellowdoor.feature.smsCodeConfirmation.SMSCodeConfirmationScreen
@@ -55,6 +56,18 @@ class App : BaseApplication() {
                     MockScreen(theme)
                 }
 
+            val forgotPasswordScreen: TypedScreenDesc<Args.Empty, ForgotPasswordScreen> =
+                registerScreen(ForgotPasswordScreen::class) {
+                    factory.forgotPasswordFactory.createForgotPasswordScreen(
+                        theme = theme,
+                        styles = ForgotPasswordScreen.Styles(
+                            yellowButton = YellowButtonCategory,
+                            textField = InputFieldCategory
+                        ),
+                        nextRoute = router.createPushRoute(mockScreen)
+                    )
+                }
+
             val smsCodeConfirmationScreen: TypedScreenDesc<Args.Parcel<SMSCodeConfirmationScreen.Arg>, SMSCodeConfirmationScreen> =
                 registerScreen(SMSCodeConfirmationScreen::class) {
                     factory.smsCodeConfirmationFactory.createSMSCodeConfirmationScreen(
@@ -95,7 +108,7 @@ class App : BaseApplication() {
                             rightButtonTextField = InputFieldCategory,
                             yellowTextButton = YellowTextButtonCategory
                         ),
-                        forgotPasswordRoute = router.createPushRoute(mockScreen),
+                        forgotPasswordRoute = router.createPushRoute(forgotPasswordScreen),
                         signUpRoute = router.createPushRoute(signUpScreen)
                     )
 

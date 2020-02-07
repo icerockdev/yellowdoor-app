@@ -1,6 +1,7 @@
 package com.icerock.yellowdoor.factory
 
 import com.icerock.yellowdoor.domain.DomainFactory
+import com.icerock.yellowdoor.feature.forgotPassword.di.ForgotPasswordFactory
 import com.icerock.yellowdoor.feature.login.di.SignInFactory
 import com.icerock.yellowdoor.feature.register.di.SignUpFactory
 import com.icerock.yellowdoor.feature.smsCodeConfirmation.di.SMSCodeConfirmationFactory
@@ -12,4 +13,5 @@ class SharedFactory {
     val signUpFactory: SignUpFactory = domainFactory.createSignUpFactory()
     val smsCodeConfirmationFactory: SMSCodeConfirmationFactory =
         domainFactory.createSMSCodeConfirmationFactory()
+    val forgotPasswordFactory: ForgotPasswordFactory = domainFactory.createForgotPasswordFactory()
 }
