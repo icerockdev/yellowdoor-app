@@ -27,4 +27,7 @@
     <string name="passwordRecovery.passwordRecovery">Password recovery</string>
     <string name="passwordRecovery.phoneNumber">Your phone number</string>
     <string name="passwordRecovery.next">Next</string>
+    <string name="passwordRecovery.newPassword">New password</string>
+    <string name="passwordRecovery.repeatPassword">Repeat new password</string>
+    <string name="passwordRecovery.savePassword">Next</string>
 </resources>

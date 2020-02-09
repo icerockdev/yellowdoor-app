@@ -7,6 +7,7 @@ package com.icerock.yellowdoor
 import com.icerock.yellowdoor.factory.SharedFactory
 import com.icerock.yellowdoor.feature.forgotPassword.ForgotPasswordScreen
 import com.icerock.yellowdoor.feature.login.SignInScreen
+import com.icerock.yellowdoor.feature.passwordRecovery.PasswordRecoveryScreen
 import com.icerock.yellowdoor.feature.register.SignUpScreen
 import com.icerock.yellowdoor.feature.smsCodeConfirmation.SMSCodeConfirmationScreen
 import com.icerock.yellowdoor.styles.*
@@ -56,6 +57,18 @@ class App : BaseApplication() {
                     MockScreen(theme)
                 }
 
+            val passwordRecoveryScreen: TypedScreenDesc<Args.Empty, PasswordRecoveryScreen> =
+                registerScreen(PasswordRecoveryScreen::class) {
+                    factory.passwordRecoveryFactory.createPasswordRecoveryScreen(
+                        theme = theme,
+                        styles = PasswordRecoveryScreen.Styles(
+                            textField = InputFieldCategory,
+                            yellowButton = YellowButtonCategory
+                        ),
+                        authRoute = router.createPushRoute(mockScreen) // TODO: pop to root
+                    )
+                }
+
             val forgotPasswordScreen: TypedScreenDesc<Args.Empty, ForgotPasswordScreen> =
                 registerScreen(ForgotPasswordScreen::class) {
                     factory.forgotPasswordFactory.createForgotPasswordScreen(
@@ -64,7 +77,7 @@ class App : BaseApplication() {
                             yellowButton = YellowButtonCategory,
                             textField = InputFieldCategory
                         ),
-                        nextRoute = router.createPushRoute(mockScreen)
+                        nextRoute = router.createPushRoute(passwordRecoveryScreen)
                     )
                 }
 

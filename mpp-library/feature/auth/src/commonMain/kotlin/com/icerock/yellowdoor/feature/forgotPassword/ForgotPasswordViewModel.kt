@@ -15,7 +15,7 @@ class ForgotPasswordViewModel(
     private val repository: ForgotPasswordRepository,
     private val validation: Validation,
     val eventsDispatcher: EventsDispatcher<EventsListener>
-): ViewModel() {
+) : ViewModel() {
 
     val phoneField: FormField<String, StringDesc> =
         FormField("", validation = liveBlock(validation::validatePhone))

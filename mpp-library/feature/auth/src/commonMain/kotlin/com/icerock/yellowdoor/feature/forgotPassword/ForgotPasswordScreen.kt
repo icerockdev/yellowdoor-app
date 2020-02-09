@@ -10,6 +10,7 @@ import dev.icerock.moko.widgets.core.Value
 import dev.icerock.moko.widgets.screen.Args
 import dev.icerock.moko.widgets.screen.WidgetScreen
 import dev.icerock.moko.widgets.screen.getViewModel
+import dev.icerock.moko.widgets.screen.listen
 import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.screen.navigation.NavigationItem
 import dev.icerock.moko.widgets.screen.navigation.Route
@@ -27,7 +28,7 @@ class ForgotPasswordScreen(
         EventsDispatcher<ForgotPasswordViewModel.EventsListener>
     ) -> ForgotPasswordViewModel,
     private val nextRoute: Route<Unit>
-): WidgetScreen<Args.Empty>(), NavigationItem, ForgotPasswordViewModel.EventsListener {
+) : WidgetScreen<Args.Empty>(), NavigationItem, ForgotPasswordViewModel.EventsListener {
 
     override val navigationBar: NavigationBar = NavigationBar.Normal(strings.title.desc())
     override val isDismissKeyboardOnTap: Boolean = true
@@ -37,6 +38,8 @@ class ForgotPasswordScreen(
         val viewModel: ForgotPasswordViewModel = getViewModel {
             createViewModelBlock(createEventsDispatcher())
         }
+
+        viewModel.eventsDispatcher.listen(this@ForgotPasswordScreen, this@ForgotPasswordScreen)
 
         constraint(size = WidgetSize.AsParent) {
             val phoneField = +input(
@@ -85,6 +88,6 @@ class ForgotPasswordScreen(
 
     object Id {
         object PhoneField : InputWidget.Id
-        object NextButton: ButtonWidget.Id
+        object NextButton : ButtonWidget.Id
     }
 }
