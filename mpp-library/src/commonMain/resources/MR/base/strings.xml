@@ -30,4 +30,16 @@
     <string name="passwordRecovery.newPassword">New password</string>
     <string name="passwordRecovery.repeatPassword">Repeat new password</string>
     <string name="passwordRecovery.savePassword">Next</string>
+
+    <string name="personalData.personalData">Personal data</string>
+    <string name="personalData.uploadNewPhoto">Upload new photo</string>
+    <string name="personalData.notIndicated">Not indicated</string>
+    <string name="personalData.birthday">Birthday</string>
+    <string name="personalData.region">Region</string>
+    <string name="personalData.city">City</string>
+    <string name="personalData.education">Education</string>
+    <string name="personalData.aboutMe">About me</string>
+    <string name="personalData.photo">Photo</string>
+    <string name="personalData.video">Video</string>
+    <string name="personalData.save">Save</string>
 </resources>

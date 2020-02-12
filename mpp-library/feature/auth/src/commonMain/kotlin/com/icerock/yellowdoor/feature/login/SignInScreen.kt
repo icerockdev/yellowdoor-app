@@ -116,11 +116,11 @@ class SignInScreen(
     }
 
     override fun routeToForgotPassword() {
-        forgotPasswordRoute.route(this, Unit)
+        forgotPasswordRoute.route(arg = Unit)
     }
 
     override fun routeToSignUp() {
-        signUpRoute.route(this, Unit)
+        signUpRoute.route(arg = Unit)
     }
 
     class Styles(

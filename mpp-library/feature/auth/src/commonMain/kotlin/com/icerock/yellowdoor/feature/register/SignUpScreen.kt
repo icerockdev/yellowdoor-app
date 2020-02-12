@@ -153,7 +153,7 @@ class SignUpScreen(
     }
 
     override fun routeToSMSCodeConfirmation(phone: String) {
-        smsCodeConfirmationRoute.route(this, SMSCodeConfirmationScreen.Arg(phone))
+        smsCodeConfirmationRoute.route(SMSCodeConfirmationScreen.Arg(phone))
     }
 
     class Styles(

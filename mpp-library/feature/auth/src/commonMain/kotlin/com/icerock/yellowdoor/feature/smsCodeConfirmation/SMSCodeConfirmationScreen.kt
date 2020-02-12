@@ -87,7 +87,7 @@ class SMSCodeConfirmationScreen(
     }
 
     override fun routeToPersonalData() {
-        routeNext.route(this)
+        routeNext.route()
     }
 
     @Parcelize

@@ -72,7 +72,7 @@ class ForgotPasswordScreen(
     }
 
     override fun routeNext() {
-        nextRoute.route(this)
+        nextRoute.route(arg = Unit)
     }
 
     class Styles(

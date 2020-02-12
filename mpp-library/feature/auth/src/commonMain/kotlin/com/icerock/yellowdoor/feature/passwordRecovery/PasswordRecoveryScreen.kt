@@ -84,7 +84,7 @@ class PasswordRecoveryScreen(
     }
 
     override fun routeToAuth() {
-        authRoute.route(this)
+        authRoute.route()
     }
 
     class Styles(
