@@ -41,8 +41,15 @@ class ForgotPasswordViewModel(
         }
     }
 
+    fun didTapBackButton() {
+        eventsDispatcher.dispatchEvent {
+            routeBack()
+        }
+    }
+
     interface EventsListener {
         fun routeNext()
+        fun routeBack()
     }
 
     interface Validation {

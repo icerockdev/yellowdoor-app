@@ -3,6 +3,7 @@ package com.icerock.yellowdoor.feature.smsCodeConfirmation
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.parcelize.Parcelable
 import dev.icerock.moko.parcelize.Parcelize
+import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
@@ -23,15 +24,26 @@ class SMSCodeConfirmationScreen(
     private val theme: Theme,
     private val strings: Strings,
     private val styles: Styles,
+    private val images: Images,
     private val routeNext: Route<Unit>,
+    private val routeBack: Route<Unit>,
     private val createViewModelBlock: (
         EventsDispatcher<SMSCodeConfirmationViewModel.EventsListener>
     ) -> SMSCodeConfirmationViewModel
 ) : WidgetScreen<Args.Parcel<SMSCodeConfirmationScreen.Arg>>(),
     SMSCodeConfirmationViewModel.EventsListener, NavigationItem {
 
-    override val navigationBar: NavigationBar =
-        NavigationBar.Normal(strings.numberConfirmation.desc())
+    override val navigationBar: NavigationBar = NavigationBar.Normal(
+        title = strings.numberConfirmation.desc(),
+        styles = styles.navigationBar,
+        backButton = NavigationBar.Normal.BarButton(
+            icon = images.backImage,
+            action = {
+                routeBack.route()
+            }
+        )
+    )
+
     override val isDismissKeyboardOnTap: Boolean = true
     override val isKeyboardResizeContent: Boolean = true
 
@@ -96,7 +108,8 @@ class SMSCodeConfirmationScreen(
     class Styles(
         val textField: InputWidget.Category,
         val instructionText: TextWidget.Category,
-        val yellowButton: ButtonWidget.Category
+        val yellowButton: ButtonWidget.Category,
+        val navigationBar: NavigationBar.Normal.Styles
     )
 
     interface Strings {
@@ -104,6 +117,10 @@ class SMSCodeConfirmationScreen(
         val smsCode: StringResource
         val smsCodeSent: StringResource
         val next: StringResource
+    }
+
+    interface Images {
+        val backImage: ImageResource
     }
 
     object Id {

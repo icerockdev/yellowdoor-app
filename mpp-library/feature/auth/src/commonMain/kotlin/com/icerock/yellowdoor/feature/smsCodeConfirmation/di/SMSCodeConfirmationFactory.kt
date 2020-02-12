@@ -9,8 +9,8 @@ import dev.icerock.moko.widgets.screen.navigation.Route
 
 class SMSCodeConfirmationFactory(
     private val repository: SMSCodeConfirmationRepository,
-    private val strings: SMSCodeConfirmationScreen.Strings
-
+    private val strings: SMSCodeConfirmationScreen.Strings,
+    private val images: SMSCodeConfirmationScreen.Images
 ) {
     fun createSMSCodeConfirmationViewModel(
         eventsDispatcher: EventsDispatcher<SMSCodeConfirmationViewModel.EventsListener>
@@ -24,13 +24,16 @@ class SMSCodeConfirmationFactory(
     fun createSMSCodeConfirmationScreen(
         theme: Theme,
         styles: SMSCodeConfirmationScreen.Styles,
-        routeNext: Route<Unit>
+        routeNext: Route<Unit>,
+        routeBack: Route<Unit>
     ): SMSCodeConfirmationScreen {
         return SMSCodeConfirmationScreen(
             theme = theme,
             strings = strings,
+            images = images,
             styles = styles,
             routeNext = routeNext,
+            routeBack = routeBack,
             createViewModelBlock = this::createSMSCodeConfirmationViewModel
         )
     }

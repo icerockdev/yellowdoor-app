@@ -10,7 +10,8 @@ import dev.icerock.moko.widgets.screen.navigation.Route
 class PasswordRecoveryFactory(
     private val repository: PasswordRecoveryRepository,
     private val strings: PasswordRecoveryScreen.Strings,
-    private val validation: PasswordRecoveryViewModel.Validation
+    private val validation: PasswordRecoveryViewModel.Validation,
+    private val images: PasswordRecoveryScreen.Images
 ) {
 
     fun createPasswordRecoveryViewModel(
@@ -26,13 +27,16 @@ class PasswordRecoveryFactory(
     fun createPasswordRecoveryScreen(
         theme: Theme,
         styles: PasswordRecoveryScreen.Styles,
-        authRoute: Route<Unit>
+        authRoute: Route<Unit>,
+        backRoute: Route<Unit>
     ): PasswordRecoveryScreen {
         return PasswordRecoveryScreen(
             theme = theme,
             styles = styles,
             strings = strings,
             authRoute = authRoute,
+            backRoute = backRoute,
+            images = images,
             createViewModelBlock = this::createPasswordRecoveryViewModel
         )
     }

@@ -3,6 +3,7 @@ package com.icerock.yellowdoor.styles
 import dev.icerock.moko.widgets.factory.FloatingLabelInputViewFactory
 import dev.icerock.moko.widgets.factory.SystemButtonViewFactory
 import dev.icerock.moko.widgets.factory.SystemTextViewFactory
+import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.style.background.Background
 import dev.icerock.moko.widgets.style.background.Fill
 import dev.icerock.moko.widgets.style.background.Shape
@@ -105,5 +106,17 @@ fun InstructionTextFactory(): SystemTextViewFactory {
             size = 12,
             color = Colors.grayTextColor
         )
+    )
+}
+
+fun createBlackNavigationBarStyle(): NavigationBar.Normal.Styles {
+    return NavigationBar.Normal.Styles(
+        backgroundColor = Colors.black,
+        textStyle = TextStyle(
+            size = 17,
+            fontStyle = FontStyle.MEDIUM,
+            color = Colors.white
+        ),
+        tintColor = Colors.yellowButtonBackgroundColor
     )
 }

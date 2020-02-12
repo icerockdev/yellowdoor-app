@@ -4,6 +4,7 @@ import com.icerock.yellowdoor.domain.DomainFactory
 import com.icerock.yellowdoor.feature.smsCodeConfirmation.SMSCodeConfirmationScreen
 import com.icerock.yellowdoor.feature.smsCodeConfirmation.di.SMSCodeConfirmationFactory
 import com.icerock.yellowdoor.feature.smsCodeConfirmation.di.SMSCodeConfirmationRepository
+import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.StringResource
 import org.example.library.MR
 
@@ -22,6 +23,9 @@ fun DomainFactory.createSMSCodeConfirmationFactory(): SMSCodeConfirmationFactory
             override val smsCode: StringResource = MR.strings.smsCodeConfirmation_smsCode
             override val smsCodeSent: StringResource =
                 MR.strings.smsCodeConfirmation_smsCodeSentToPhone
+        },
+        images = object: SMSCodeConfirmationScreen.Images {
+            override val backImage: ImageResource = MR.images.backIcon
         }
     )
 }

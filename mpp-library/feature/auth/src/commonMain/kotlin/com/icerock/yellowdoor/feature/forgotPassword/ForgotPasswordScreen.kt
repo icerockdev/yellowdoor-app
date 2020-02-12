@@ -1,10 +1,12 @@
 package com.icerock.yellowdoor.feature.forgotPassword
 
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
+import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import dev.icerock.moko.widgets.*
+import dev.icerock.moko.widgets.core.Image
 import dev.icerock.moko.widgets.core.Theme
 import dev.icerock.moko.widgets.core.Value
 import dev.icerock.moko.widgets.screen.Args
@@ -24,13 +26,25 @@ class ForgotPasswordScreen(
     private val theme: Theme,
     private val strings: Strings,
     private val styles: Styles,
+    private val images: Images,
     private val createViewModelBlock: (
         EventsDispatcher<ForgotPasswordViewModel.EventsListener>
     ) -> ForgotPasswordViewModel,
-    private val nextRoute: Route<Unit>
+    private val nextRoute: Route<Unit>,
+    private val backRoute: Route<Unit>
 ) : WidgetScreen<Args.Empty>(), NavigationItem, ForgotPasswordViewModel.EventsListener {
 
-    override val navigationBar: NavigationBar = NavigationBar.Normal(strings.title.desc())
+    override val navigationBar: NavigationBar = NavigationBar.Normal(
+        title = strings.title.desc(),
+        styles = styles.navigationBarStyle,
+        backButton = NavigationBar.Normal.BarButton(
+            icon = images.backImage,
+            action = {
+                routeBack()
+            }
+        )
+    )
+
     override val isDismissKeyboardOnTap: Boolean = true
     override val isKeyboardResizeContent: Boolean = true
 
@@ -75,15 +89,24 @@ class ForgotPasswordScreen(
         nextRoute.route(arg = Unit)
     }
 
+    override fun routeBack() {
+        backRoute.route(arg = Unit)
+    }
+
     class Styles(
         val textField: InputWidget.Category?,
-        val yellowButton: ButtonWidget.Category?
+        val yellowButton: ButtonWidget.Category?,
+        val navigationBarStyle: NavigationBar.Normal.Styles
     )
 
     interface Strings {
         val title: StringResource
         val textFieldTitle: StringResource
         val nextButtonTitle: StringResource
+    }
+
+    interface Images {
+        val backImage: ImageResource
     }
 
     object Id {

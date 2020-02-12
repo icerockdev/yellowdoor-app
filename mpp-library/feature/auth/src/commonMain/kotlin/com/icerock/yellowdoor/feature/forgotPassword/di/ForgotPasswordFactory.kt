@@ -10,7 +10,8 @@ import dev.icerock.moko.widgets.screen.navigation.Route
 class ForgotPasswordFactory(
     private val repository: ForgotPasswordRepository,
     private val strings: ForgotPasswordScreen.Strings,
-    private val validation: ForgotPasswordViewModel.Validation
+    private val validation: ForgotPasswordViewModel.Validation,
+    private val images: ForgotPasswordScreen.Images
 ) {
 
     fun createForgotPasswordViewModel(
@@ -26,6 +27,7 @@ class ForgotPasswordFactory(
     fun createForgotPasswordScreen(
         theme: Theme,
         nextRoute: Route<Unit>,
+        backRoute: Route<Unit>,
         styles: ForgotPasswordScreen.Styles
     ): ForgotPasswordScreen {
         return ForgotPasswordScreen(
@@ -33,6 +35,8 @@ class ForgotPasswordFactory(
             strings = strings,
             styles = styles,
             nextRoute = nextRoute,
+            backRoute = backRoute,
+            images = images,
             createViewModelBlock = this::createForgotPasswordViewModel
         )
     }

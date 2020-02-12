@@ -63,8 +63,10 @@ class App : BaseApplication() {
                         theme = theme,
                         styles = PasswordRecoveryScreen.Styles(
                             textField = InputFieldCategory,
-                            yellowButton = YellowButtonCategory
+                            yellowButton = YellowButtonCategory,
+                            navigationBar = createBlackNavigationBarStyle()
                         ),
+                        backRoute = router.createPopRoute(),
                         authRoute = router.createPushRoute(mockScreen) // TODO: pop to root
                     )
                 }
@@ -75,9 +77,11 @@ class App : BaseApplication() {
                         theme = theme,
                         styles = ForgotPasswordScreen.Styles(
                             yellowButton = YellowButtonCategory,
-                            textField = InputFieldCategory
+                            textField = InputFieldCategory,
+                            navigationBarStyle = createBlackNavigationBarStyle()
                         ),
-                        nextRoute = router.createPushRoute(passwordRecoveryScreen)
+                        nextRoute = router.createPushRoute(passwordRecoveryScreen),
+                        backRoute = router.createPopRoute()
                     )
                 }
 
@@ -88,8 +92,10 @@ class App : BaseApplication() {
                         styles = SMSCodeConfirmationScreen.Styles(
                             yellowButton = YellowButtonCategory,
                             instructionText = InstructionTextCategory,
-                            textField = InputFieldCategory
+                            textField = InputFieldCategory,
+                            navigationBar = createBlackNavigationBarStyle()
                         ),
+                        routeBack = router.createPopRoute(),
                         routeNext = router.createPushRoute(mockScreen)
                     )
                 }
@@ -101,12 +107,14 @@ class App : BaseApplication() {
                         styles = SignUpScreen.Styles(
                             linkText = HTMLTextCategory,
                             textField = InputFieldCategory,
-                            yellowButton = YellowButtonCategory
+                            yellowButton = YellowButtonCategory,
+                            navigationBar = createBlackNavigationBarStyle()
                         ),
                         smsCodeConfirmationRoute = router.createPushRoute(smsCodeConfirmationScreen) {
                             SMSCodeConfirmationScreen.Arg(it.phone)
                         },
-                        userAgreementRoute = router.createPushRoute(mockScreen)
+                        userAgreementRoute = router.createPushRoute(mockScreen),
+                        backRoute = router.createPopRoute()
                     )
                 }
 

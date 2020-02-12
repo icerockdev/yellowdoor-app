@@ -1,6 +1,7 @@
 package com.icerock.yellowdoor.feature.passwordRecovery
 
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
+import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
@@ -27,10 +28,23 @@ class PasswordRecoveryScreen(
     private val createViewModelBlock: (
         EventsDispatcher<PasswordRecoveryViewModel.EventsListener>
     ) -> PasswordRecoveryViewModel,
-    private val authRoute: Route<Unit>
+    private val images: Images,
+    private val authRoute: Route<Unit>,
+    private val backRoute: Route<Unit>
 ) : WidgetScreen<Args.Empty>(), NavigationItem, PasswordRecoveryViewModel.EventsListener {
 
-    override val navigationBar: NavigationBar = NavigationBar.Normal(strings.title.desc())
+    override val navigationBar: NavigationBar =
+        NavigationBar.Normal(
+            title = strings.title.desc(),
+            styles = styles.navigationBar,
+            backButton = NavigationBar.Normal.BarButton(
+                icon = images.backButton,
+                action = {
+                    backRoute.route()
+                }
+            )
+        )
+
     override val isDismissKeyboardOnTap: Boolean = true
     override val isKeyboardResizeContent: Boolean = true
 
@@ -89,7 +103,8 @@ class PasswordRecoveryScreen(
 
     class Styles(
         val textField: InputWidget.Category?,
-        val yellowButton: ButtonWidget.Category?
+        val yellowButton: ButtonWidget.Category?,
+        val navigationBar: NavigationBar.Normal.Styles?
     )
 
     interface Strings {
@@ -97,6 +112,10 @@ class PasswordRecoveryScreen(
         val newPassword: StringResource
         val newPasswordRepeat: StringResource
         val savePassword: StringResource
+    }
+
+    interface Images {
+        val backButton: ImageResource
     }
 
     object Id {

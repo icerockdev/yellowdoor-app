@@ -2,6 +2,7 @@ package com.icerock.yellowdoor.feature.register
 
 import com.icerock.yellowdoor.feature.smsCodeConfirmation.SMSCodeConfirmationScreen
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
+import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
@@ -15,6 +16,7 @@ import dev.icerock.moko.widgets.screen.listen
 import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.screen.navigation.NavigationItem
 import dev.icerock.moko.widgets.screen.navigation.Route
+import dev.icerock.moko.widgets.screen.navigation.route
 import dev.icerock.moko.widgets.style.input.InputType
 import dev.icerock.moko.widgets.style.view.SizeSpec
 import dev.icerock.moko.widgets.style.view.WidgetSize
@@ -23,15 +25,27 @@ import dev.icerock.moko.widgets.style.view.WidgetSize
 class SignUpScreen(
     private val strings: Strings,
     private val styles: Styles,
+    private val images: Images,
     private val theme: Theme,
     private val createViewModelBlock: (
         EventsDispatcher<SignUpViewModel.EventsListener>
     ) -> SignUpViewModel,
     private val userAgreementRoute: Route<Unit>,
+    private val routeBack: Route<Unit>,
     private val smsCodeConfirmationRoute: Route<SMSCodeConfirmationScreen.Arg>
 ) : WidgetScreen<Args.Empty>(), NavigationItem, SignUpViewModel.EventsListener {
 
-    override val navigationBar: NavigationBar = NavigationBar.Normal(strings.signUp.desc())
+    override val navigationBar: NavigationBar = NavigationBar.Normal(
+        title = strings.signUp.desc(),
+        styles = styles.navigationBar,
+        backButton = NavigationBar.Normal.BarButton(
+            icon = images.backImage,
+            action = {
+                routeBack.route()
+            }
+        )
+    )
+
     override val isDismissKeyboardOnTap: Boolean = true
     override val isKeyboardResizeContent: Boolean = true
 
@@ -159,7 +173,8 @@ class SignUpScreen(
     class Styles(
         val textField: InputWidget.Category,
         val yellowButton: ButtonWidget.Category,
-        val linkText: TextWidget.Category
+        val linkText: TextWidget.Category,
+        val navigationBar: NavigationBar.Normal.Styles
     )
 
     interface Strings {
@@ -171,6 +186,10 @@ class SignUpScreen(
         val repeatPassword: StringResource
         val iAcceptTheUserAgreement: StringResource
         val signUp: StringResource
+    }
+
+    interface Images {
+        val backImage: ImageResource
     }
 
     object Id {

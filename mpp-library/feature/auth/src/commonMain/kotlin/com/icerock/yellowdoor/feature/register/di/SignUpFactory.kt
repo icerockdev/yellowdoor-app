@@ -11,7 +11,8 @@ import dev.icerock.moko.widgets.screen.navigation.Route
 class SignUpFactory(
     val repository: SignUpRepository,
     val strings: SignUpScreen.Strings,
-    val validation: SignUpViewModel.Validation
+    val validation: SignUpViewModel.Validation,
+    val images: SignUpScreen.Images
 ) {
 
     fun createSignUpViewModel(
@@ -28,14 +29,17 @@ class SignUpFactory(
         theme: Theme,
         styles: SignUpScreen.Styles,
         userAgreementRoute: Route<Unit>,
+        backRoute: Route<Unit>,
         smsCodeConfirmationRoute: Route<SMSCodeConfirmationScreen.Arg>
     ): SignUpScreen {
         return SignUpScreen(
             strings = strings,
             theme = theme,
+            images = images,
             styles = styles,
             createViewModelBlock = this::createSignUpViewModel,
             userAgreementRoute = userAgreementRoute,
+            routeBack = backRoute,
             smsCodeConfirmationRoute = smsCodeConfirmationRoute
         )
     }

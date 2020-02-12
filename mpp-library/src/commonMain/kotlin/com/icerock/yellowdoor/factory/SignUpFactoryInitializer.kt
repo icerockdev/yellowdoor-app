@@ -5,6 +5,7 @@ import com.icerock.yellowdoor.feature.register.SignUpScreen
 import com.icerock.yellowdoor.feature.register.SignUpViewModel
 import com.icerock.yellowdoor.feature.register.di.SignUpFactory
 import com.icerock.yellowdoor.feature.register.di.SignUpRepository
+import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.StringResource
 import dev.icerock.moko.resources.desc.StringDesc
 import org.example.library.MR
@@ -57,6 +58,9 @@ fun DomainFactory.createSignUpFactory(): SignUpFactory {
             ): StringDesc? {
                 return null
             }
+        },
+        images = object: SignUpScreen.Images {
+            override val backImage: ImageResource = MR.images.backIcon
         }
     )
 }
