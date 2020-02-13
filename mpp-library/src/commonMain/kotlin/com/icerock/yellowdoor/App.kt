@@ -8,6 +8,7 @@ import com.icerock.yellowdoor.factory.SharedFactory
 import com.icerock.yellowdoor.feature.forgotPassword.ForgotPasswordScreen
 import com.icerock.yellowdoor.feature.login.SignInScreen
 import com.icerock.yellowdoor.feature.passwordRecovery.PasswordRecoveryScreen
+import com.icerock.yellowdoor.feature.personalInfo.PersonalInfoScreen
 import com.icerock.yellowdoor.feature.register.SignUpScreen
 import com.icerock.yellowdoor.feature.smsCodeConfirmation.SMSCodeConfirmationScreen
 import com.icerock.yellowdoor.styles.*
@@ -43,6 +44,8 @@ class App : BaseApplication() {
             factory[LinkButtonCategory] = LinkButtonFactory()
             factory[HTMLTextCategory] = HTMLTextFactory(12)
             factory[InstructionTextCategory] = InstructionTextFactory()
+            factory[BlackTextButtonCategory] = BlackTextButtonFactory()
+            factory[BlackTextCategory] = BlackTextCategoryFactory(15)
             factory[SignUpScreen.Id.Checkbox] = CheckboxSwitchViewFactory(
                 checkedImage = MR.images.checkboxEnable,
                 uncheckedImage = MR.images.checkboxDisable
@@ -55,6 +58,21 @@ class App : BaseApplication() {
             val mockScreen: TypedScreenDesc<Args.Empty, MockScreen> =
                 registerScreen(MockScreen::class) {
                     MockScreen(theme)
+                }
+
+            val personalInfoScreen: TypedScreenDesc<Args.Empty, PersonalInfoScreen> =
+                registerScreen(PersonalInfoScreen::class) {
+                    factory.personalInfoFactory.createPersonalInfoScreen(
+                        theme = theme,
+                        styles = PersonalInfoScreen.Styles(
+                            navigationBar = createBlackNavigationBarStyle(),
+                            uploadNewPhotoButton = BlackTextButtonCategory,
+                            selectableFieldTitle = InstructionTextCategory,
+                            selectableFieldContent = BlackTextCategory
+                        ),
+                        closeRoute = router.createPushRoute(mockScreen),
+                        newsRoute = router.createPushRoute(mockScreen)
+                    )
                 }
 
             val passwordRecoveryScreen: TypedScreenDesc<Args.Empty, PasswordRecoveryScreen> =
@@ -96,7 +114,7 @@ class App : BaseApplication() {
                             navigationBar = createBlackNavigationBarStyle()
                         ),
                         routeBack = router.createPopRoute(),
-                        routeNext = router.createPushRoute(mockScreen)
+                        routeNext = router.createPushRoute(personalInfoScreen)
                     )
                 }
 

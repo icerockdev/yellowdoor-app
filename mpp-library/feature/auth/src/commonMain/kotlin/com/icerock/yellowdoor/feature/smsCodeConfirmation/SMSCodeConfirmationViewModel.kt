@@ -24,7 +24,12 @@ class SMSCodeConfirmationViewModel(
     ).all(true)
 
     fun didTapNextButton() {
-        if (!isFormValid.value) {
+        eventsDispatcher.dispatchEvent {
+            routeToPersonalData()
+        }
+
+
+       /* if (!isFormValid.value) {
             return
         }
 
@@ -38,7 +43,7 @@ class SMSCodeConfirmationViewModel(
             } catch (error: Throwable) {
 
             }
-        }
+        }*/
     }
 
     interface EventsListener {
