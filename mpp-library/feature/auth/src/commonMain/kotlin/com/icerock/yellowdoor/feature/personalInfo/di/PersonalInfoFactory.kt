@@ -27,7 +27,8 @@ class PersonalInfoFactory(
         theme: Theme,
         styles: PersonalInfoScreen.Styles,
         closeRoute: Route<Unit>,
-        newsRoute: Route<Unit>
+        newsRoute: Route<Unit>,
+        regionRoute: Route<Unit>
     ): PersonalInfoScreen {
         return PersonalInfoScreen(
             theme = theme,
@@ -36,7 +37,8 @@ class PersonalInfoFactory(
             newsRoute = newsRoute,
             createViewModelBlock = this::createPersonalInfoViewModel,
             images = images,
-            strings = strings
+            strings = strings,
+            regionRoute = regionRoute
         )
     }
 }

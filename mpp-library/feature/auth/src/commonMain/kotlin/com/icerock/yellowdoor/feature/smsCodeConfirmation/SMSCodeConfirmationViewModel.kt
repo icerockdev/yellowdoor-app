@@ -8,7 +8,6 @@ import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.all
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.resources.desc.StringDesc
-import kotlinx.coroutines.launch
 
 
 class SMSCodeConfirmationViewModel(
@@ -29,21 +28,21 @@ class SMSCodeConfirmationViewModel(
         }
 
 
-       /* if (!isFormValid.value) {
-            return
-        }
+        /* if (!isFormValid.value) {
+             return
+         }
 
-        viewModelScope.launch {
-            try {
-                repository.confirm(smsCodeField.value())
+         viewModelScope.launch {
+             try {
+                 repository.confirm(smsCodeField.value())
 
-                eventsDispatcher.dispatchEvent {
-                    routeToPersonalData()
-                }
-            } catch (error: Throwable) {
+                 eventsDispatcher.dispatchEvent {
+                     routeToPersonalData()
+                 }
+             } catch (error: Throwable) {
 
-            }
-        }*/
+             }
+         }*/
     }
 
     interface EventsListener {

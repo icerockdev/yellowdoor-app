@@ -14,6 +14,7 @@ import dev.icerock.moko.widgets.core.Value
 import dev.icerock.moko.widgets.screen.Args
 import dev.icerock.moko.widgets.screen.WidgetScreen
 import dev.icerock.moko.widgets.screen.getViewModel
+import dev.icerock.moko.widgets.screen.listen
 import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.screen.navigation.NavigationItem
 import dev.icerock.moko.widgets.screen.navigation.Route
@@ -30,7 +31,8 @@ class PersonalInfoScreen(
         EventsDispatcher<PersonalInfoViewModel.EventsListener>
     ) -> PersonalInfoViewModel,
     private val closeRoute: Route<Unit>,
-    private val newsRoute: Route<Unit>
+    private val newsRoute: Route<Unit>,
+    private val regionRoute: Route<Unit>
 ) : WidgetScreen<Args.Empty>(), NavigationItem, PersonalInfoViewModel.EventsListener {
 
     private val viewModel: PersonalInfoViewModel = getViewModel {
@@ -49,6 +51,8 @@ class PersonalInfoScreen(
     )
 
     override fun createContentWidget() = with(theme) {
+        viewModel.eventsDispatcher.listen(this@PersonalInfoScreen, this@PersonalInfoScreen)
+
         constraint(size = WidgetSize.AsParent) {
             val scroll = +scroll(
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.MatchConstraint),
@@ -79,10 +83,9 @@ class PersonalInfoScreen(
                     val birthdayField = +createField(
                         title = strings.birthday,
                         text = viewModel.birthday,
-                        didTapBlock = viewModel::didTapBirthday
+                        didTapBlock = viewModel::didTapRegion
                     )
-
-
+                    
                     constraints {
                         avatarImage.topToTop(root.safeArea).offset(32)
                         avatarImage.leftToLeft(root.safeArea).offset(16)
@@ -112,18 +115,17 @@ class PersonalInfoScreen(
 
     }
 
+    override fun routeToRegionSelection() {
+        println("1")
+        regionRoute.route(arg = Unit)
+    }
+
     private fun createField(
         title: StringDesc,
         text: LiveData<String>,
         didTapBlock: (() -> Unit)
     ): ConstraintWidget<WidgetSize.Const<SizeSpec.AsParent, SizeSpec.AsParent>> = with(theme) {
         return constraint(size = WidgetSize.AsParent) {
-            val button = +button(
-                size = WidgetSize.Const(SizeSpec.AsParent, SizeSpec.Exact(38.0f)),
-                content = ButtonWidget.Content.Text(Value.data(null)),
-                onTap = didTapBlock
-            )
-
             val arrowImage = +image(
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.MatchConstraint),
                 id = Id.RightArrowImage,
@@ -147,11 +149,16 @@ class PersonalInfoScreen(
                 }
             )
 
-            constraints {
-                button.topToTop(root)
-                button.leftRightToLeftRight(root)
-                button.bottomToBottom(root)
+            val button = +button(
+                size = WidgetSize.Const(SizeSpec.AsParent, SizeSpec.Exact(38.0f)),
+                content = ButtonWidget.Content.Text(Value.data("8ewr7cgt8fw3t87wt8v".desc())),
+                onTap = {
+                    println("0")
+                    didTapBlock()
+                }
+            )
 
+            constraints {
                 arrowImage.rightToRight(root)
                 arrowImage.centerYToCenterY(root)
 
@@ -162,6 +169,10 @@ class PersonalInfoScreen(
                 contentText.leftToLeft(root)
                 contentText.rightToLeft(arrowImage).offset(8)
                 contentText.bottomToBottom(root)
+
+                button.topToTop(root)
+                button.leftRightToLeftRight(root)
+                button.bottomToBottom(root)
             }
         }
     }
@@ -198,7 +209,7 @@ class PersonalInfoScreen(
         object UploadNewPhotoButton : ButtonWidget.Id
         object RightArrowImage : ImageWidget.Id
         object Scroll : ScrollWidget.Id
-        object SelectableFieldTitle: TextWidget.Id
-        object SelectableFieldContent: TextWidget.Id
+        object SelectableFieldTitle : TextWidget.Id
+        object SelectableFieldContent : TextWidget.Id
     }
 }

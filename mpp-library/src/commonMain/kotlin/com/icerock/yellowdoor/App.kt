@@ -10,6 +10,7 @@ import com.icerock.yellowdoor.feature.login.SignInScreen
 import com.icerock.yellowdoor.feature.passwordRecovery.PasswordRecoveryScreen
 import com.icerock.yellowdoor.feature.personalInfo.PersonalInfoScreen
 import com.icerock.yellowdoor.feature.register.SignUpScreen
+import com.icerock.yellowdoor.feature.selectItem.SelectItemScreen
 import com.icerock.yellowdoor.feature.smsCodeConfirmation.SMSCodeConfirmationScreen
 import com.icerock.yellowdoor.styles.*
 import dev.icerock.moko.resources.desc.StringDesc
@@ -60,6 +61,17 @@ class App : BaseApplication() {
                     MockScreen(theme)
                 }
 
+            val selectItemScreen: TypedScreenDesc<Args.Empty, SelectItemScreen> =
+                registerScreen(SelectItemScreen::class) {
+                    factory.selectItemFactory.createSelectItemScreen(
+                        theme = theme,
+                        styles = SelectItemScreen.Styles(
+                            navigationBar = createBlackNavigationBarStyle()
+                        ),
+                        backRoute = router.createPopRoute()
+                    )
+                }
+
             val personalInfoScreen: TypedScreenDesc<Args.Empty, PersonalInfoScreen> =
                 registerScreen(PersonalInfoScreen::class) {
                     factory.personalInfoFactory.createPersonalInfoScreen(
@@ -71,7 +83,8 @@ class App : BaseApplication() {
                             selectableFieldContent = BlackTextCategory
                         ),
                         closeRoute = router.createPushRoute(mockScreen),
-                        newsRoute = router.createPushRoute(mockScreen)
+                        newsRoute = router.createPushRoute(mockScreen),
+                        regionRoute = router.createPushRoute(selectItemScreen)
                     )
                 }
 

@@ -1,14 +1,11 @@
 package com.icerock.yellowdoor.feature.personalInfo
 
 import com.icerock.yellowdoor.feature.personalInfo.di.PersonalInfoRepository
-import dev.icerock.moko.fields.FormField
-import dev.icerock.moko.fields.liveBlock
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
 import dev.icerock.moko.mvvm.livedata.readOnly
 import dev.icerock.moko.mvvm.viewmodel.ViewModel
-import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.widgets.core.Image
 
 
@@ -26,7 +23,6 @@ class PersonalInfoViewModel(
     val birthday: LiveData<String> = _birthday.readOnly()
 
 
-
     fun didTapUploadNewPhotoButton() {
 
     }
@@ -36,7 +32,10 @@ class PersonalInfoViewModel(
     }
 
     fun didTapRegion() {
-
+        println("2")
+        eventsDispatcher.dispatchEvent {
+            routeToRegionSelection()
+        }
     }
 
     fun didTapCity() {
@@ -53,5 +52,6 @@ class PersonalInfoViewModel(
 
     interface EventsListener {
         fun routeToNews()
+        fun routeToRegionSelection()
     }
 }
