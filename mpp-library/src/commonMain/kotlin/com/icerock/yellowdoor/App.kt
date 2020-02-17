@@ -66,7 +66,8 @@ class App : BaseApplication() {
                     factory.selectItemFactory.createSelectItemScreen(
                         theme = theme,
                         styles = SelectItemScreen.Styles(
-                            navigationBar = createBlackNavigationBarStyle()
+                            navigationBar = createBlackNavigationBarStyle(),
+                            itemTitle = BlackTextCategory
                         ),
                         backRoute = router.createPopRoute()
                     )
@@ -81,7 +82,8 @@ class App : BaseApplication() {
                             uploadNewPhotoButton = BlackTextButtonCategory,
                             selectableFieldTitle = InstructionTextCategory,
                             selectableFieldContent = BlackTextCategory,
-                            textField = InputFieldCategory
+                            textField = InputFieldCategory,
+                            yellowButton = YellowButtonCategory
                         ),
                         closeRoute = router.createPushRoute(mockScreen),
                         newsRoute = router.createPushRoute(mockScreen),

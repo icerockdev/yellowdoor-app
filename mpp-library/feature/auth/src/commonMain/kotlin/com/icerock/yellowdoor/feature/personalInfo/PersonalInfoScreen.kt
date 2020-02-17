@@ -57,7 +57,7 @@ class PersonalInfoScreen(
             val scroll = +scroll(
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.MatchConstraint),
                 id = Id.Scroll,
-                child = constraint(
+                child = linear(
                     size = WidgetSize.Const(SizeSpec.AsParent, SizeSpec.WrapContent)
                 ) {
                     val avatarImage = +image(
@@ -107,7 +107,24 @@ class PersonalInfoScreen(
                         maxLines = MutableLiveData<Int?>(16).readOnly()
                     )
 
-                    constraints {
+                    val aboutField = +input(
+                        category = styles.textField,
+                        size = WidgetSize.AsParent,
+                        field = viewModel.about,
+                        id = Id.EducationInput,
+                        label = const(strings.aboutMe),
+                        maxLines = MutableLiveData<Int?>(16).readOnly()
+                    )
+
+                    val signUpButton = +button(
+                        category = styles.yellowButton,
+                        size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.Exact(46.0f)),
+                        id = Id.SaveButton,
+                        content = ButtonWidget.Content.Text(Value.data(strings.save)),
+                        onTap = viewModel::didTapSaveButton
+                    )
+
+                    /*constraints {
                         avatarImage.topToTop(root.safeArea).offset(32)
                         avatarImage.leftToLeft(root.safeArea).offset(16)
 
@@ -128,7 +145,13 @@ class PersonalInfoScreen(
 
                         educationField.leftRightToLeftRight(root.safeArea).offset(16)
                         educationField.topToBottom(cityField).offset(32)
-                    }
+
+                        aboutField.leftRightToLeftRight(root.safeArea).offset(16)
+                        aboutField.topToBottom(educationField).offset(32)
+
+                        signUpButton.leftRightToLeftRight(root.safeArea).offset(16)
+                        signUpButton.topToBottom(aboutField).offset(32)
+                    }*/
                 })
 
             constraints {
@@ -202,7 +225,8 @@ class PersonalInfoScreen(
         val uploadNewPhotoButton: ButtonWidget.Category,
         val selectableFieldTitle: TextWidget.Category,
         val selectableFieldContent: TextWidget.Category,
-        val textField: InputWidget.Category
+        val textField: InputWidget.Category,
+        val yellowButton: ButtonWidget.Category
     )
 
     interface Strings {
@@ -233,5 +257,6 @@ class PersonalInfoScreen(
         object SelectableFieldTitle : TextWidget.Id
         object SelectableFieldContent : TextWidget.Id
         object EducationInput: InputWidget.Id
+        object SaveButton: ButtonWidget.Id
     }
 }

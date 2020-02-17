@@ -6,6 +6,7 @@ import dev.icerock.moko.mvvm.livedata.map
 import dev.icerock.moko.widgets.*
 import dev.icerock.moko.widgets.core.Image
 import dev.icerock.moko.widgets.core.Theme
+import dev.icerock.moko.widgets.style.view.SizeSpec
 import dev.icerock.moko.widgets.style.view.WidgetSize
 import dev.icerock.moko.widgets.units.UnitItemRoot
 import dev.icerock.moko.widgets.units.WidgetsTableUnitItem
@@ -38,7 +39,7 @@ class SelectItemUnit(
 
                         val checkImage = +visibility(
                             child = image(
-                                size = WidgetSize.WrapContent,
+                                size = WidgetSize.Const(SizeSpec.Exact(18.0f), SizeSpec.Exact(14.0f)),
                                 image = const(selectedImage)
                             ),
                             showed = data.value.isSelected
@@ -49,9 +50,9 @@ class SelectItemUnit(
                             checkImage.centerYToCenterY(root)
 
                             titleText.leftToLeft(root).offset(16)
-                            titleText.topToTop(root)
+                            titleText.topToTop(root).offset(16)
                             titleText.rightToLeft(checkImage).offset(16)
-                            titleText.bottomToBottom(root)
+                            titleText.bottomToBottom(root).offset(16)
                         }
                     }
                 },

@@ -36,6 +36,10 @@ class PersonalInfoViewModel(
         return@liveBlock "".desc()
     })
 
+    val about: FormField<String, StringDesc> = FormField("", liveBlock {
+        return@liveBlock "".desc()
+    })
+
     fun didTapUploadNewPhotoButton() {
 
     }
@@ -45,7 +49,6 @@ class PersonalInfoViewModel(
     }
 
     fun didTapRegion() {
-        println("2")
         eventsDispatcher.dispatchEvent {
             routeToRegionSelection()
         }
