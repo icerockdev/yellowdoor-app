@@ -36,14 +36,12 @@ class SelectItemUnit(
                             text = const(data.value.title)
                         )
 
-                        val checkImage = +image(
-                            size = WidgetSize.WrapContent,
-                            image = data.value.isSelected.map { value: Boolean ->
-                                //if (value)
-                                return@map selectedImage
-
-                                //return@map Image.
-                            }
+                        val checkImage = +visibility(
+                            child = image(
+                                size = WidgetSize.WrapContent,
+                                image = const(selectedImage)
+                            ),
+                            showed = data.value.isSelected
                         )
 
                         constraints {

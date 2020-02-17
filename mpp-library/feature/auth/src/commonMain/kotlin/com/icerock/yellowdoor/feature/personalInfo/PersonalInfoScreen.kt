@@ -1,9 +1,7 @@
 package com.icerock.yellowdoor.feature.personalInfo
 
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
-import dev.icerock.moko.mvvm.livedata.LiveData
-import dev.icerock.moko.mvvm.livedata.flatMap
-import dev.icerock.moko.mvvm.livedata.map
+import dev.icerock.moko.mvvm.livedata.*
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
@@ -50,6 +48,8 @@ class PersonalInfoScreen(
         )
     )
 
+    override val isDismissKeyboardOnTap: Boolean = false
+
     override fun createContentWidget() = with(theme) {
         viewModel.eventsDispatcher.listen(this@PersonalInfoScreen, this@PersonalInfoScreen)
 
@@ -83,9 +83,30 @@ class PersonalInfoScreen(
                     val birthdayField = +createField(
                         title = strings.birthday,
                         text = viewModel.birthday,
+                        didTapBlock = viewModel::didTapBirthday
+                    )
+
+                    val regionField = +createField(
+                        title = strings.region,
+                        text = viewModel.region,
                         didTapBlock = viewModel::didTapRegion
                     )
-                    
+
+                    val cityField = +createField(
+                        title = strings.city,
+                        text = viewModel.city,
+                        didTapBlock = viewModel::didTapCity
+                    )
+
+                    val educationField = +input(
+                        category = styles.textField,
+                        size = WidgetSize.AsParent,
+                        field = viewModel.education,
+                        id = Id.EducationInput,
+                        label = const(strings.education),
+                        maxLines = MutableLiveData<Int?>(16).readOnly()
+                    )
+
                     constraints {
                         avatarImage.topToTop(root.safeArea).offset(32)
                         avatarImage.leftToLeft(root.safeArea).offset(16)
@@ -96,10 +117,17 @@ class PersonalInfoScreen(
                         uploadPhotoButton.rightToLeft(uploadPhotoButtonImage).offset(16)
                         uploadPhotoButton.centerYToCenterY(uploadPhotoButtonImage)
 
-                        birthdayField.leftToLeft(root.safeArea).offset(16)
+                        birthdayField.leftRightToLeftRight(root.safeArea).offset(16)
                         birthdayField.topToBottom(avatarImage).offset(32)
-                        birthdayField.rightToRight(root.safeArea).offset(16)
 
+                        regionField.leftRightToLeftRight(root.safeArea).offset(16)
+                        regionField.topToBottom(birthdayField).offset(32)
+
+                        cityField.leftRightToLeftRight(root.safeArea).offset(16)
+                        cityField.topToBottom(regionField).offset(32)
+
+                        educationField.leftRightToLeftRight(root.safeArea).offset(16)
+                        educationField.topToBottom(cityField).offset(32)
                     }
                 })
 
@@ -124,8 +152,8 @@ class PersonalInfoScreen(
         title: StringDesc,
         text: LiveData<String>,
         didTapBlock: (() -> Unit)
-    ): ConstraintWidget<WidgetSize.Const<SizeSpec.AsParent, SizeSpec.AsParent>> = with(theme) {
-        return constraint(size = WidgetSize.AsParent) {
+    ): ClickableWidget<WidgetSize.Const<SizeSpec.AsParent, SizeSpec.AsParent>> = with(theme) {
+        val widget = constraint(size = WidgetSize.AsParent) {
             val arrowImage = +image(
                 size = WidgetSize.Const(SizeSpec.MatchConstraint, SizeSpec.MatchConstraint),
                 id = Id.RightArrowImage,
@@ -149,15 +177,6 @@ class PersonalInfoScreen(
                 }
             )
 
-            val button = +button(
-                size = WidgetSize.Const(SizeSpec.AsParent, SizeSpec.Exact(38.0f)),
-                content = ButtonWidget.Content.Text(Value.data("8ewr7cgt8fw3t87wt8v".desc())),
-                onTap = {
-                    println("0")
-                    didTapBlock()
-                }
-            )
-
             constraints {
                 arrowImage.rightToRight(root)
                 arrowImage.centerYToCenterY(root)
@@ -169,19 +188,21 @@ class PersonalInfoScreen(
                 contentText.leftToLeft(root)
                 contentText.rightToLeft(arrowImage).offset(8)
                 contentText.bottomToBottom(root)
-
-                button.topToTop(root)
-                button.leftRightToLeftRight(root)
-                button.bottomToBottom(root)
             }
         }
+
+        return clickable(child = widget, onClick = {
+            println("test")
+            didTapBlock()
+        })
     }
 
     class Styles(
         val navigationBar: NavigationBar.Normal.Styles,
         val uploadNewPhotoButton: ButtonWidget.Category,
         val selectableFieldTitle: TextWidget.Category,
-        val selectableFieldContent: TextWidget.Category
+        val selectableFieldContent: TextWidget.Category,
+        val textField: InputWidget.Category
     )
 
     interface Strings {
@@ -211,5 +232,6 @@ class PersonalInfoScreen(
         object Scroll : ScrollWidget.Id
         object SelectableFieldTitle : TextWidget.Id
         object SelectableFieldContent : TextWidget.Id
+        object EducationInput: InputWidget.Id
     }
 }

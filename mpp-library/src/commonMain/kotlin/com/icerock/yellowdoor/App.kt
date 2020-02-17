@@ -80,7 +80,8 @@ class App : BaseApplication() {
                             navigationBar = createBlackNavigationBarStyle(),
                             uploadNewPhotoButton = BlackTextButtonCategory,
                             selectableFieldTitle = InstructionTextCategory,
-                            selectableFieldContent = BlackTextCategory
+                            selectableFieldContent = BlackTextCategory,
+                            textField = InputFieldCategory
                         ),
                         closeRoute = router.createPushRoute(mockScreen),
                         newsRoute = router.createPushRoute(mockScreen),
