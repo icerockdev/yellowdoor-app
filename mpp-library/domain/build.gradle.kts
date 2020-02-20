@@ -18,13 +18,5 @@ dependencies {
     mppLibrary(Deps.Libs.MultiPlatform.kotlinStdLib)
     mppLibrary(Deps.Libs.MultiPlatform.coroutines)
 
-    androidLibrary(Deps.Libs.Android.lifecycle)
-    androidLibrary(Deps.Libs.Android.recyclerView)
-
-    mppLibrary(Deps.Libs.MultiPlatform.mokoMvvm)
-    mppLibrary(Deps.Libs.MultiPlatform.mokoResources)
-    mppLibrary(Deps.Libs.MultiPlatform.mokoUnits)
-    mppLibrary(Deps.Libs.MultiPlatform.mokoWidgets)
-
     mppLibrary(Deps.Libs.MultiPlatform.napier)
 }

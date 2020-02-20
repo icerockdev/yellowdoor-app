@@ -14,6 +14,7 @@ import dev.icerock.moko.widgets.screen.listen
 import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.screen.navigation.NavigationItem
 import dev.icerock.moko.widgets.screen.navigation.Route
+import dev.icerock.moko.widgets.screen.navigation.route
 import dev.icerock.moko.widgets.style.input.InputType
 import dev.icerock.moko.widgets.style.view.SizeSpec
 import dev.icerock.moko.widgets.style.view.WidgetSize
@@ -63,7 +64,7 @@ class SignInScreen(
                 id = Id.Phone,
                 field = viewModel.phoneField,
                 label = const(strings.phone.desc() as StringDesc),
-                inputType = InputType.PHONE
+                inputType = InputType.Phone()
             )
 
             val passwordField = +input(
@@ -72,7 +73,7 @@ class SignInScreen(
                 id = Id.Password,
                 field = viewModel.passwordField,
                 label = const(strings.password.desc() as StringDesc),
-                inputType = InputType.PASSWORD
+                inputType = InputType.Password()
             )
 
             val forgotPasswordButton = +button(
@@ -116,11 +117,11 @@ class SignInScreen(
     }
 
     override fun routeToForgotPassword() {
-        forgotPasswordRoute.route(this, Unit)
+        forgotPasswordRoute.route()
     }
 
     override fun routeToSignUp() {
-        signUpRoute.route(this, Unit)
+        signUpRoute.route()
     }
 
     class Styles(
