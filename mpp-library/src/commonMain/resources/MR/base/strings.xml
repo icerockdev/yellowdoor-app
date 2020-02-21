@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
-    <string name="signIn.signIn">Sign in</string>
-    <string name="signIn.signUp">Sign up</string>
-    <string name="signIn.phone">Phone</string>
-    <string name="signIn.password">Password</string>
-    <string name="signIn.forgotPassword">Forgot password?</string>
+    <string name="auth.sign_in">Sign in</string>
+    <string name="auth.sign_up">Sign up</string>
+    <string name="auth.phone">Phone</string>
+    <string name="auth.password">Password</string>
+    <string name="auth.forgot_password">Forgot password?</string>
 </resources>

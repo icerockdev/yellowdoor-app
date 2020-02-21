@@ -1,20 +1,14 @@
 /*
- * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+ * Copyright 2020 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-kapt")
-    id("dev.icerock.mobile.multiplatform-units")
 }
 
 android {
     compileSdkVersion(Versions.Android.compileSdk)
-
-    dataBinding {
-        isEnabled = true
-    }
 
     dexOptions {
         javaMaxHeapSize = "2g"
@@ -24,7 +18,7 @@ android {
         minSdkVersion(Versions.Android.minSdk)
         targetSdkVersion(Versions.Android.targetSdk)
 
-        applicationId = "org.example.app"
+        applicationId = "dev.icerock.yellowdoor"
 
         versionCode = 1
         versionName = "0.1.0"
@@ -61,10 +55,4 @@ dependencies {
     implementation(Deps.Libs.MultiPlatform.napier.android!!)
 
     implementation(project(":mpp-library"))
-}
-
-multiplatformUnits {
-    classesPackage = "org.example.app"
-    dataBindingPackage = "org.example.app"
-    layoutsSourceSet = "main"
 }
