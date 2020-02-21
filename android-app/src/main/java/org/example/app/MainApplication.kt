@@ -5,7 +5,7 @@
 package org.example.app
 
 import android.app.Application
-import org.example.mpp.App
+import com.icerock.yellowdoor.App
 
 class MainApplication : Application() {
     override fun onCreate() {

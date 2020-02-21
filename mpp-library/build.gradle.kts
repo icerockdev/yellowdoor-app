@@ -23,8 +23,13 @@ val mppLibs = listOf(
     Deps.Libs.MultiPlatform.mokoWidgets
 )
 
+val mppModules = listOf(
+    Modules.MultiPlatform.domain,
+    Modules.MultiPlatform.Feature.auth
+)
+
 setupFramework(
-    exports = mppLibs
+    exports = mppLibs + mppModules
 )
 
 dependencies {
@@ -33,7 +38,13 @@ dependencies {
 
     androidLibrary(Deps.Libs.Android.lifecycle)
 
-    mppLibs.forEach { mppLibrary(it) }
+    mppLibs.forEach {
+        mppLibrary(it)
+    }
+
+    mppModules.forEach {
+        mppModule(it)
+    }
 }
 
 multiplatformResources {

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
-    <string name="hello_world">Hello world!</string>
+    <string name="signIn.signIn">Sign in</string>
+    <string name="signIn.signUp">Sign up</string>
+    <string name="signIn.phone">Phone</string>
+    <string name="signIn.password">Password</string>
+    <string name="signIn.forgotPassword">Forgot password?</string>
 </resources>
