@@ -2,7 +2,7 @@
  * Copyright 2020 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-package dev.icerock.yellowdoor.feature.auth.presentation
+package dev.icerock.yellowdoor.feature.auth.presentation.signin
 
 import dev.icerock.moko.fields.FormField
 import dev.icerock.moko.fields.liveBlock

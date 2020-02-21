@@ -4,15 +4,14 @@
 
 package dev.icerock.yellowdoor.app
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import dev.icerock.yellowdoor.App
 
-class MainApplication : Application() {
+class MainApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        mppApplication = App()
-            .apply { initialize() }
+        mppApplication = App().apply { initialize() }
     }
 
     companion object {

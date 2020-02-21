@@ -10,6 +10,18 @@ object Modules {
                 name = ":mpp-library:feature:auth",
                 exported = true
             )
+            val forgotPassword: MultiPlatformModule = MultiPlatformModule(
+                name = ":mpp-library:feature:forgot-password",
+                exported = true
+            )
+            val profile: MultiPlatformModule = MultiPlatformModule(
+                name = ":mpp-library:feature:profile",
+                exported = true
+            )
+            val selection: MultiPlatformModule = MultiPlatformModule(
+                name = ":mpp-library:feature:selection",
+                exported = true
+            )
         }
     }
 }

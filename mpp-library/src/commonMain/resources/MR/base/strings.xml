@@ -5,4 +5,41 @@
     <string name="auth.phone">Phone</string>
     <string name="auth.password">Password</string>
     <string name="auth.forgot_password">Forgot password?</string>
+
+    <string name="register.sign_up">Sign Up</string>
+    <string name="register.last_name">Last name</string>
+    <string name="register.first_name">First name</string>
+    <string name="register.phone">Phone</string>
+    <string name="register.email">Email</string>
+    <string name="register.password">Password</string>
+    <string name="register.repeat_password">Repeat password</string>
+    <string name="register.accept_agreement">I accept the &lt;a href=http://www.google.com&gt;User Agreement&lt;/a&gt;
+    </string>
+
+    <string name="confirmation.number_confirmation">Number confirmation</string>
+    <string name="confirmation.sms_code">SMS code</string>
+    <string name="confirmation.code_sent">SMS with a confirmation code was sent to\n the phone</string>
+    <string name="confirmation.next">Next</string>
+
+    <string name="password_recovery.password_recovery">Password recovery</string>
+    <string name="password_recovery.phone_number">Your phone number</string>
+    <string name="password_recovery.next">Next</string>
+    <string name="password_recovery.new_password">New password</string>
+    <string name="password_recovery.repeat_password">Repeat new password</string>
+    <string name="password_recovery.save_password">Next</string>
+
+    <string name="profile.personal_data">Personal data</string>
+    <string name="profile.upload_photo">Upload new photo</string>
+    <string name="profile.not_indicated">Not indicated</string>
+    <string name="profile.birthday">Birthday</string>
+    <string name="profile.region">Region</string>
+    <string name="profile.city">City</string>
+    <string name="profile.education">Education</string>
+    <string name="profile.about_me">About me</string>
+    <string name="profile.photo">Photo</string>
+    <string name="profile.video">Video</string>
+    <string name="profile.save">Save</string>
+
+    <string name="selection.region">Region</string>
+    <string name="selection.city">City</string>
 </resources>

@@ -2,7 +2,7 @@
  * Copyright 2020 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-package dev.icerock.yellowdoor.feature.auth.presentation
+package dev.icerock.yellowdoor.feature.auth.presentation.signin
 
 import dev.icerock.moko.mvvm.dispatcher.EventsDispatcher
 import dev.icerock.moko.resources.StringResource
@@ -38,7 +38,8 @@ class SignInScreen(
     private val signUpRoute: Route<Unit>,
     private val forgotPasswordRoute: Route<Unit>,
     private val strings: Strings
-) : WidgetScreen<Args.Empty>(), NavigationItem, SignInViewModel.EventsListener {
+) : WidgetScreen<Args.Empty>(), NavigationItem,
+    SignInViewModel.EventsListener {
 
     override val navigationBar: NavigationBar get() = NavigationBar.None
     override val isDismissKeyboardOnTap: Boolean = true

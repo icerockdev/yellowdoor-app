@@ -23,6 +23,8 @@ android {
         versionCode = 1
         versionName = "0.1.0"
 
+        multiDexEnabled = true
+
         vectorDrawables.useSupportLibrary = true
 
         val url = "https://newsapi.org/v2/"
@@ -51,6 +53,7 @@ dependencies {
     implementation(Deps.Libs.Android.appCompat.name)
     implementation(Deps.Libs.Android.material.name)
     implementation(Deps.Libs.Android.recyclerView.name)
+    implementation(Deps.Libs.Android.multidex.name)
 
     implementation(Deps.Libs.MultiPlatform.napier.android!!)
 

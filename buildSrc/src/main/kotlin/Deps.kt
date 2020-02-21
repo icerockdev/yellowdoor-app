@@ -38,6 +38,9 @@ object Deps {
             val lifecycle = AndroidLibrary(
                 name = "androidx.lifecycle:lifecycle-extensions:${Versions.Libs.Android.lifecycle}"
             )
+            val multidex = AndroidLibrary(
+                name = "androidx.multidex:multidex:${Versions.Libs.Android.multidex}"
+            )
         }
 
         object MultiPlatform {

@@ -27,9 +27,12 @@ enableFeaturePreview("GRADLE_METADATA")
 include(":android-app")
 include(":mpp-library")
 
-listOf (
+listOf(
     Modules.MultiPlatform.domain,
-    Modules.MultiPlatform.Feature.auth
+    Modules.MultiPlatform.Feature.auth,
+    Modules.MultiPlatform.Feature.forgotPassword,
+    Modules.MultiPlatform.Feature.profile,
+    Modules.MultiPlatform.Feature.selection
 ).forEach {
     include(it.name)
 }

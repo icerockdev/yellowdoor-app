@@ -9,6 +9,7 @@ package dev.icerock.yellowdoor.theme
 import dev.icerock.moko.widgets.factory.FloatingLabelInputViewFactory
 import dev.icerock.moko.widgets.factory.SystemButtonViewFactory
 import dev.icerock.moko.widgets.factory.SystemTextViewFactory
+import dev.icerock.moko.widgets.screen.navigation.NavigationBar
 import dev.icerock.moko.widgets.style.background.Background
 import dev.icerock.moko.widgets.style.background.Fill
 import dev.icerock.moko.widgets.style.background.Shape
@@ -75,5 +76,63 @@ fun BoldText25Factory(): SystemTextViewFactory {
             color = Colors.blackTextColor,
             fontStyle = FontStyle.BOLD
         )
+    )
+}
+
+fun LinkButtonFactory(): SystemButtonViewFactory {
+    return SystemButtonViewFactory(
+        textStyle = TextStyle(
+            size = 15,
+            color = Colors.yellowTextColor,
+            fontStyle = FontStyle.MEDIUM
+        )
+    )
+}
+
+fun HTMLTextFactory(fontSize: Int): SystemTextViewFactory {
+    return SystemTextViewFactory(
+        textStyle = TextStyle(
+            size = fontSize
+        ),
+        isHtmlConverted = true
+    )
+}
+
+fun InstructionTextFactory(): SystemTextViewFactory {
+    return SystemTextViewFactory(
+        textStyle = TextStyle(
+            size = 12,
+            color = Colors.grayTextColor
+        )
+    )
+}
+
+fun BlackTextButtonFactory(): SystemButtonViewFactory {
+    return SystemButtonViewFactory(
+        textStyle = TextStyle(
+            size = 14,
+            color = Colors.blackTextColor
+        )
+    )
+}
+
+fun BlackTextCategoryFactory(size: Int): SystemTextViewFactory {
+    return SystemTextViewFactory(
+        textStyle = TextStyle(
+            size = size,
+            color = Colors.blackTextColor
+        )
+    )
+}
+
+fun createBlackNavigationBarStyle(): NavigationBar.Normal.Styles {
+    return NavigationBar.Normal.Styles(
+        backgroundColor = Colors.black,
+        textStyle = TextStyle(
+            size = 17,
+            fontStyle = FontStyle.MEDIUM,
+            color = Colors.white
+        ),
+        tintColor = Colors.yellowButtonBackgroundColor
     )
 }

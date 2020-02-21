@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+ * Copyright 2020 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
 plugins {
@@ -25,7 +25,10 @@ val mppLibs = listOf(
 
 val mppModules = listOf(
     Modules.MultiPlatform.domain,
-    Modules.MultiPlatform.Feature.auth
+    Modules.MultiPlatform.Feature.auth,
+    Modules.MultiPlatform.Feature.profile,
+    Modules.MultiPlatform.Feature.forgotPassword,
+    Modules.MultiPlatform.Feature.selection
 )
 
 setupFramework(

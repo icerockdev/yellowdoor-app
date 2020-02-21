@@ -6,4 +6,12 @@ package dev.icerock.yellowdoor.feature.auth.model
 
 interface AuthRepository {
     suspend fun signIn(phone: String, password: String): String
+    suspend fun confirm(code: String)
+    suspend fun signUp(
+        lastName: String,
+        firstName: String,
+        phone: String,
+        email: String,
+        password: String
+    )
 }
